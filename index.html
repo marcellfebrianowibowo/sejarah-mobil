@@ -12,20 +12,52 @@
 
     <!-- Navbar -->
     <nav class="bg-white dark:bg-gray-800 shadow-md p-4 flex justify-between items-center sticky top-0 z-50">
-        <h1 class="text-xl font-bold tracking-wider text-red-600 dark:text-red-500 cursor-pointer" onclick="tampilKatalogMobil()">AUTO-LEGACY</h1>
+        <h1 class="text-xl font-bold tracking-wider text-red-600 dark:text-red-500 cursor-pointer" onclick="tampilBeranda()">AUTO-LEGACY</h1>
         <div class="flex items-center gap-6">
+            <a href="#" onclick="tampilBeranda()" class="hover:text-red-500 font-bold text-sm border-b-2 border-transparent hover:border-red-500 transition">Beranda</a>
             <a href="#" onclick="tampilKatalogMobil()" class="hover:text-red-500 font-bold text-sm border-b-2 border-transparent hover:border-red-500 transition">Katalog Mobil</a>
             <a href="#" onclick="tampilKatalogBodykit()" class="hover:text-red-500 font-bold text-sm border-b-2 border-transparent hover:border-red-500 transition">Sejarah Bodykit</a>
             <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-sm" title="Ganti Tema">🌓</button>
         </div>
     </nav>
 
-    <!-- Konten Utama (Mobil) -->
-    <div id="appContainer">
-        <!-- Hero Section -->
-        <header class="bg-cover bg-center py-20 px-6 text-center bg-gray-800 text-white" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80');">
-            <h2 class="text-4xl font-extrabold mb-4">Jejak Sejarah Mobil Legendaris Dunia</h2>
-            <p class="max-w-xl mx-auto text-gray-300 mb-6">Eksplorasi evolusi, performa, dan latar belakang sejarah kendaraan ikonik berbasis Cloud Database.</p>
+    <!-- Tampilan Awal / Menu Utama (Home Hub) -->
+    <div id="homeContainer" class="flex-grow flex flex-col justify-center items-center px-6 py-12 text-center">
+        <div class="max-w-3xl mb-10">
+            <span class="text-xs font-bold tracking-widest text-red-600 dark:text-red-500 uppercase bg-red-100 dark:bg-red-900/30 px-3 py-1 rounded-full">Ensiklopedia Otomotif JDM</span>
+            <h2 class="text-4xl md:text-5xl font-extrabold mt-4 mb-4 tracking-tight">Pilih Kategori Eksplorasi</h2>
+            <p class="text-gray-600 dark:text-gray-400 text-base md:text-lg">Selamat datang di Auto-Legacy. Silakan pilih menu di bawah ini untuk memulai perjalanan sejarah otomotif Anda.</p>
+        </div>
+
+        <!-- Kartu Pilihan Utama di Tengah -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
+            <!-- Pilihan 1: Katalog Mobil -->
+            <div onclick="tampilKatalogMobil()" class="group relative bg-gray-800 rounded-2xl overflow-hidden shadow-2xl cursor-pointer transform hover:-translate-y-2 transition duration-300 border border-gray-700 h-80 flex flex-col justify-end p-8 text-left bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80');">
+                <span class="text-xs font-semibold text-red-400 uppercase tracking-wider mb-1">Database Cloud</span>
+                <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-red-400 transition">Katalog Mobil Legendaris</h3>
+                <p class="text-sm text-gray-300 mb-4 line-clamp-2">Jelajahi sejarah mendalam, mesin, dan performa puluhan mobil sport ikonik dunia.</p>
+                <div class="flex items-center gap-2 text-sm font-bold text-red-500 group-hover:translate-x-2 transition">
+                    Buka Katalog Mobil &rarr;
+                </div>
+            </div>
+
+            <!-- Pilihan 2: Sejarah Bodykit -->
+            <div onclick="tampilKatalogBodykit()" class="group relative bg-gray-800 rounded-2xl overflow-hidden shadow-2xl cursor-pointer transform hover:-translate-y-2 transition duration-300 border border-gray-700 h-80 flex flex-col justify-end p-8 text-left bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1594070319944-7c0c85c2901a?auto=format&fit=crop&w=800&q=80');">
+                <span class="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-1">Custom Culture</span>
+                <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-red-400 transition">Sejarah Bodykit & Tuner</h3>
+                <p class="text-sm text-gray-300 mb-4 line-clamp-2">Mengenal mahakarya wide-body dan filosofi rumah modifikasi dunia seperti LBWK dan RWB.</p>
+                <div class="flex items-center gap-2 text-sm font-bold text-red-500 group-hover:translate-x-2 transition">
+                    Jelajahi Sejarah Bodykit &rarr;
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Konten Utama (Mobil) - Awalnya Disembunyikan -->
+    <div id="appContainer" class="hidden">
+        <header class="bg-cover bg-center py-16 px-6 text-center bg-gray-800 text-white" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80');">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-3">Jejak Sejarah Mobil Legendaris Dunia</h2>
+            <p class="max-w-xl mx-auto text-gray-300 text-sm">Eksplorasi evolusi, performa, dan latar belakang sejarah kendaraan ikonik berbasis Cloud Database.</p>
         </header>
 
         <main class="max-w-6xl mx-auto px-6 py-12 w-full">
@@ -40,11 +72,11 @@
         </main>
     </div>
 
-    <!-- Konten Bodykit -->
+    <!-- Konten Bodykit - Awalnya Disembunyikan -->
     <div id="bodykitContainer" class="hidden">
-        <header class="bg-cover bg-center py-20 px-6 text-center bg-gray-800 text-white" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1594070319944-7c0c85c2901a?auto=format&fit=crop&w=1200&q=80');">
-            <h2 class="text-4xl font-extrabold mb-4">Galeri Modifikasi & Bodykit</h2>
-            <p class="max-w-xl mx-auto text-gray-300 mb-6">Mengenal lebih dekat para seniman otomotif dan mahakarya wide-body dunia.</p>
+        <header class="bg-cover bg-center py-16 px-6 text-center bg-gray-800 text-white" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1594070319944-7c0c85c2901a?auto=format&fit=crop&w=1200&q=80');">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-3">Galeri Modifikasi & Bodykit</h2>
+            <p class="max-w-xl mx-auto text-gray-300 text-sm">Mengenal lebih dekat para seniman otomotif dan mahakarya wide-body dunia.</p>
         </header>
 
         <main class="max-w-6xl mx-auto px-6 py-12 w-full">
@@ -75,7 +107,7 @@
         const SUPABASE_URL = 'https://ligbjputqpzubhbxmdia.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_-CWQKbOMRIot2AKjeZp8LA_P9ZsQeAf';
         let semuaDataMobil = [];
-        let menuAktif = 'mobil'; 
+        let menuAktif = 'home'; 
 
         // --- DATA STATIS BODYKIT (LBWK & RWB) ---
         const dataBodykit = [
@@ -139,23 +171,20 @@ Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekad
             }
         }
 
-        // --- FUNGSI PEMANGGILAN GATOTO LOKAL LENGKAP ---
+        // --- FUNGSI PEMANGGILAN FOTO LOKAL LENGKAP ---
         function getFotoMobil(nama) {
             const n = nama.toLowerCase();
 
-            // 1. Nissan GT-R / Skyline Series
             if (n.includes('r32')) return './r32.jpg';
             if (n.includes('hakosuka') || n.includes('2000gt-r')) return './hakosuka.jpg';
             if (n.includes('r34') || n.includes('skyline') || n.includes('gt-r')) return './gtr.jpg';
 
-            // 2. Nissan Z & Silvia Series
             if (n.includes('240z') || n.includes('s30')) return './240z.jpg';
             if (n.includes('350z') || n.includes('z33')) return './350z.jpg';
             if (n.includes('180sx') || n.includes('rps13')) return './180sx.jpg';
             if (n.includes('s14')) return './s14.jpg';
             if (n.includes('silvia') || n.includes('s15')) return './silvia.jpg';
 
-            // 3. Toyota Series
             if (n.includes('a70')) return './a70.jpg';
             if (n.includes('supra') || n.includes('a80')) return './supra.jpg';
             if (n.includes('chaser') || n.includes('jzx100')) return './chaser.jpg';
@@ -165,35 +194,40 @@ Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekad
             if (n.includes('86') || n.includes('brz')) return './gt86.jpg';
             if (n.includes('crown')) return './crown.jpg';
 
-            // 4. Honda Series
             if (n.includes('ek9') || n.includes('civic')) return './ek9.jpg';
             if (n.includes('dc2') || n.includes('integra')) return './dc2.jpg';
             if (n.includes('nsx')) return './nsx.jpg';
             if (n.includes('s2000')) return './s2000.jpg';
 
-            // 5. Mazda Series
             if (n.includes('miata') || n.includes('mx-5') || n.includes('mx5')) return './miata.jpg';
             if (n.includes('az-1') || n.includes('az1') || n.includes('autozam')) return './az1.jpg';
             if (n.includes('rx-7') || n.includes('rx7') || n.includes('mazda')) return './rx7.jpg';
 
-            // 6. Mitsubishi Series
             if (n.includes('3000gt') || n.includes('vr-4')) return './3000gt.jpg';
             if (n.includes('eclipse')) return './eclipse.jpg';
             if (n.includes('evo') || n.includes('lancer')) return './evo.jpg';
 
-            // 7. Subaru, Lexus & European Legends
             if (n.includes('22b')) return './22b.jpg';
             if (n.includes('impreza') || n.includes('wrx')) return './impreza.jpg';
             if (n.includes('lfa') || n.includes('lexus')) return './lfa.jpg';
             if (n.includes('porsche') || n.includes('911')) return './porsche.jpg';
 
-            // Gambar cadangan default jika file belum diunggah
             return 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
         }
 
-        // --- FUNGSI TAMPILAN MENU ---
+        // --- FUNGSI TAMPILAN MENU & NAVIGASI ---
+        function tampilBeranda() {
+            menuAktif = 'home';
+            document.getElementById('homeContainer').classList.remove('hidden');
+            document.getElementById('appContainer').classList.add('hidden');
+            document.getElementById('bodykitContainer').classList.add('hidden');
+            document.getElementById('detailContainer').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         function tampilKatalogMobil() {
             menuAktif = 'mobil';
+            document.getElementById('homeContainer').classList.add('hidden');
             document.getElementById('appContainer').classList.remove('hidden');
             document.getElementById('bodykitContainer').classList.add('hidden');
             document.getElementById('detailContainer').classList.add('hidden');
@@ -202,6 +236,7 @@ Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekad
 
         function tampilKatalogBodykit() {
             menuAktif = 'bodykit';
+            document.getElementById('homeContainer').classList.add('hidden');
             document.getElementById('appContainer').classList.add('hidden');
             document.getElementById('detailContainer').classList.add('hidden');
             document.getElementById('bodykitContainer').classList.remove('hidden');
@@ -212,7 +247,8 @@ Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekad
 
         function kembaliKeMenu() {
             if(menuAktif === 'mobil') tampilKatalogMobil();
-            else tampilKatalogBodykit();
+            else if(menuAktif === 'bodykit') tampilKatalogBodykit();
+            else tampilBeranda();
         }
 
         // --- FUNGSI RENDER KATALOG ---
@@ -304,7 +340,7 @@ Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekad
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Jalankan aplikasi saat halaman dimuat
+        // Ambil data database di latar belakang
         ambilDataMobil();
     </script>
 </body>
