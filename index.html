@@ -40,7 +40,7 @@
         </main>
     </div>
 
-    <!-- Konten Bodykit (Awalnya Disembunyikan) -->
+    <!-- Konten Bodykit -->
     <div id="bodykitContainer" class="hidden">
         <header class="bg-cover bg-center py-20 px-6 text-center bg-gray-800 text-white" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1594070319944-7c0c85c2901a?auto=format&fit=crop&w=1200&q=80');">
             <h2 class="text-4xl font-extrabold mb-4">Galeri Modifikasi & Bodykit</h2>
@@ -55,7 +55,7 @@
         </main>
     </div>
 
-    <!-- Halaman Detail Umum (Dipakai bergantian oleh Mobil dan Bodykit) -->
+    <!-- Halaman Detail Umum -->
     <div id="detailContainer" class="hidden max-w-4xl mx-auto px-6 py-12 w-full flex-grow">
         <button onclick="kembaliKeMenu()" class="mb-6 bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2">
             &larr; Kembali
@@ -76,24 +76,30 @@
         const SUPABASE_URL = 'https://ligbjputqpzubhbxmdia.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_-CWQKbOMRIot2AKjeZp8LA_P9ZsQeAf';
         let semuaDataMobil = [];
-        let menuAktif = 'mobil'; // Penanda menu yang sedang dibuka
+        let menuAktif = 'mobil'; 
 
-        // --- DATA STATIS BODYKIT ---
+        // --- DATA STATIS BODYKIT (Sejarah LBWK Diperbarui) ---
         const dataBodykit = [
             {
                 id: 1,
                 nama_bodykit: "Liberty Walk (LBWK)",
                 asal: "Nagoya, Jepang",
                 pendiri: "Wataru Kato",
-                sejarah: "Liberty Walk didirikan oleh Wataru Kato di Nagoya, Jepang. Terinspirasi dari gaya modifikasi 'Bosozoku' dan mobil balap siluet Jepang era 70-an, Kato-san menciptakan tren wide-body ekstrem. Ciri khas utama LBWK adalah overfender lebar yang dibaut langsung ke bodi asli mobil (bolt-on) hingga memperlihatkan kepala bautnya, memberikan kesan agresif dan tanpa kompromi. LBWK telah merevolusi dunia modifikasi, tak hanya pada JDM seperti Nissan GT-R, tapi juga mendobrak tabu dengan memotong fender supercar langka seperti Ferrari dan Lamborghini.",
-                foto_cover: "./lbwk-logo.jpg" // Menggunakan file logo yang baru Anda unggah
+                sejarah: `Liberty Walk (LBWK) didirikan pada tahun 1993 oleh seorang visioner bernama Wataru Kato (yang akrab disapa Kato-san) di Nagoya, Jepang. Pada awalnya, Liberty Walk hanyalah sebuah bengkel kecil yang berfokus pada penjualan mobil bekas dan mengimpor mobil-mobil eksotis dari Amerika Serikat ke Jepang. Namun, Kato-san memiliki hasrat yang terpendam untuk mengubah industri mobil modifikasi yang menurutnya mulai terasa membosankan dan terlalu kaku.
+
+Gaya modifikasi LBWK sangat kental terinspirasi dari budaya balap jalanan klasik Jepang era 70-an dan 80-an, khususnya gaya "Kaido Racer" dan kultur "Bosozoku" atau Works Style. Ciri khas paling brutal dan ikonik dari Liberty Walk adalah keberanian mereka memotong fender asli pabrikan, lalu memaku overfender super lebar langsung ke bodi mobil. Baut-baut atau paku keling (rivets) sengaja diekspos (dibiarkan terlihat) untuk memberikan kesan agresif, mentah, dan layaknya mobil balap siluet retro, dipadukan dengan postur mobil yang dirapatkan ke aspal menggunakan sistem suspensi udara (air suspension).
+
+Gebrakan terbesar yang membuat nama Liberty Walk meledak di kancah global terjadi ketika Kato-san mendobrak "tabu" dan aturan suci dunia otomotif: ia dengan santai memotong bodi mulus supercar Eropa seharga miliaran rupiah seperti Lamborghini Murcielago, Lamborghini Aventador, dan Ferrari 458. Tindakan ekstrem ini sempat memicu kemarahan para purist (kaum pecinta mobil orisinal), namun di sisi lain, justru keberanian inilah yang membuat LBWK dipuja sebagai dewa oleh para penggemar custom culture di seluruh dunia.
+
+Selain supercar Eropa, LBWK tentu saja melahirkan mahakarya memukau untuk deretan legenda JDM, mulai dari Nissan GT-R (R35), Skyline Hakosuka, Mazda RX-7, hingga Toyota Supra. Dengan mengusung semboyan filosofis "Imagine all the people living life in peace" yang terinspirasi dari lagu John Lennon, Wataru Kato menegaskan bahwa modifikasi LBWK bukan sekadar mencari kecepatan di sirkuit. Ini adalah tentang kebebasan berekspresi tanpa batas, mendobrak aturan, dan menghadirkan senyuman bagi siapa saja yang melihat mobil-mobil spektakuler tersebut melintas di jalanan.`,
+                foto_cover: "./lbwk-logo.jpg" 
             },
             {
                 id: 2,
                 nama_bodykit: "RAUH-Welt Begriff (RWB)",
                 asal: "Chiba, Jepang",
                 pendiri: "Akira Nakai",
-                sejarah: "RWB adalah garasi tuning Porsche khusus yang didirikan oleh Akira Nakai. Setiap mobil dibangun dan dipotong langsung oleh tangan Nakai-san sendiri tanpa bantuan mesin ukur digital, menciptakan karya seni mekanis yang memiliki roh dan jiwa balap jalanan klasik.",
+                sejarah: `RWB adalah garasi tuning Porsche khusus yang didirikan oleh Akira Nakai. Setiap mobil dibangun dan dipotong langsung oleh tangan Nakai-san sendiri tanpa bantuan mesin ukur digital, menciptakan karya seni mekanis yang memiliki roh dan jiwa balap jalanan klasik.`,
                 foto_cover: "https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=1000&q=80"
             }
         ];
@@ -180,7 +186,6 @@
             dataBodykit.forEach(kit => {
                 container.innerHTML += `
                     <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
-                        <!-- class diubah menjadi object-contain bg-white dan ditambah padding (p-4) agar logo rapi -->
                         <img src="${kit.foto_cover}" alt="${kit.nama_bodykit}" class="h-48 w-full object-contain bg-white grayscale hover:grayscale-0 transition duration-500 p-4">
                         <div class="p-5 flex flex-col flex-grow justify-between">
                             <div>
@@ -224,7 +229,6 @@
             document.getElementById('detailContent').innerHTML = `
                 <span class="text-xs bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-3 py-1 rounded-full font-semibold">Asal: ${kit.asal} • Pendiri: ${kit.pendiri}</span>
                 <h2 class="text-3xl md:text-4xl font-extrabold mt-3 mb-6">${kit.nama_bodykit}</h2>
-                <!-- Tampilan detail untuk logo juga diubah menjadi object-contain bg-white -->
                 <div class="rounded-xl overflow-hidden shadow-lg mb-6"><img src="${kit.foto_cover}" class="w-full h-72 md:h-96 object-contain bg-white p-4"></div>
                 <h3 class="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Sejarah & Filosofi Desain</h3>
                 <p class="text-base text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${kit.sejarah}</p>
