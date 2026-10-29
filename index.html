@@ -103,17 +103,16 @@
             }
         }
 
-        // Fungsi khusus foto bertema Fast & Furious
+        // Fungsi yang memanggil gambar lokal Anda
         function getFotoMobil(nama) {
             const n = nama.toLowerCase();
             if (n.includes('skyline') || n.includes('r34') || n.includes('gt-r')) {
-                // Nissan Skyline GT-R R34 (Fast & Furious Blue Livery)
-                return 'https://images.unsplash.com/photo-1600712242805-5f78671b24da?auto=format&fit=crop&w=1000&q=80';
+                // Memanggil file gtr.jpg dari GitHub Anda
+                return './gtr.jpg';
             } else if (n.includes('supra') || n.includes('a80')) {
-                // Toyota Supra MK4 (Fast & Furious Orange / Classic Style)
-                return 'https://images.unsplash.com/photo-1582599658252-8706346743b8?auto=format&fit=crop&w=1000&q=80';
+                // Memanggil file supra.jpg dari GitHub Anda
+                return './supra.jpg';
             } else if (n.includes('rx-7') || n.includes('mazda')) {
-                // Mazda RX-7
                 return 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1000&q=80';
             } else {
                 return 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
