@@ -12,29 +12,27 @@
 
     <!-- Navbar -->
     <nav class="bg-white dark:bg-gray-800 shadow-md p-4 flex justify-between items-center sticky top-0 z-50">
-        <h1 class="text-xl font-bold tracking-wider text-red-600 dark:text-red-500 cursor-pointer" onclick="tampilKatalog()">AUTO-LEGACY</h1>
-        <div class="flex items-center gap-4">
-            <a href="#" onclick="tampilKatalog()" class="hover:text-red-500 font-medium text-sm">Katalog</a>
+        <h1 class="text-xl font-bold tracking-wider text-red-600 dark:text-red-500 cursor-pointer" onclick="tampilKatalogMobil()">AUTO-LEGACY</h1>
+        <div class="flex items-center gap-6">
+            <a href="#" onclick="tampilKatalogMobil()" class="hover:text-red-500 font-bold text-sm border-b-2 border-transparent hover:border-red-500 transition">Katalog Mobil</a>
+            <a href="#" onclick="tampilKatalogBodykit()" class="hover:text-red-500 font-bold text-sm border-b-2 border-transparent hover:border-red-500 transition">Sejarah Bodykit</a>
             <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-sm" title="Ganti Tema">🌓</button>
         </div>
     </nav>
 
-    <!-- Konten Utama -->
+    <!-- Konten Utama (Mobil) -->
     <div id="appContainer">
         <!-- Hero Section -->
-        <header id="heroSection" class="bg-cover bg-center py-20 px-6 text-center bg-gray-800 text-white" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80');">
+        <header class="bg-cover bg-center py-20 px-6 text-center bg-gray-800 text-white" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80');">
             <h2 class="text-4xl font-extrabold mb-4">Jejak Sejarah Mobil Legendaris Dunia</h2>
             <p class="max-w-xl mx-auto text-gray-300 mb-6">Eksplorasi evolusi, performa, dan latar belakang sejarah kendaraan ikonik berbasis Cloud Database.</p>
-            <a href="#katalog" class="bg-red-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-red-700 shadow-lg inline-block">Mulai Jelajahi</a>
         </header>
 
-        <!-- Katalog & Pencarian -->
-        <main id="katalog" class="max-w-6xl mx-auto px-6 py-12 w-full">
+        <main class="max-w-6xl mx-auto px-6 py-12 w-full">
             <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-                <h3 class="text-2xl font-bold">Katalog Mobil & Sejarah</h3>
+                <h3 class="text-2xl font-bold">Katalog Mobil</h3>
                 <input type="text" id="searchInput" placeholder="Cari mobil atau pabrikan..." class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 w-full md:w-72 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
             </div>
-
             <!-- Grid Kartu Mobil -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="mobilContainer">
                 <div class="col-span-3 text-center py-10 text-gray-500">Memuat data dari database Supabase...</div>
@@ -42,10 +40,25 @@
         </main>
     </div>
 
-    <!-- Halaman Detail Sejarah -->
+    <!-- Konten Bodykit (Awalnya Disembunyikan) -->
+    <div id="bodykitContainer" class="hidden">
+        <header class="bg-cover bg-center py-20 px-6 text-center bg-gray-800 text-white" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1594070319944-7c0c85c2901a?auto=format&fit=crop&w=1200&q=80');">
+            <h2 class="text-4xl font-extrabold mb-4">Galeri Modifikasi & Bodykit</h2>
+            <p class="max-w-xl mx-auto text-gray-300 mb-6">Mengenal lebih dekat para seniman otomotif dan mahakarya wide-body dunia.</p>
+        </header>
+
+        <main class="max-w-6xl mx-auto px-6 py-12 w-full">
+            <h3 class="text-2xl font-bold mb-8">Katalog Bodykit Legend</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="katalogBodykitGrid">
+                <!-- Akan dirender lewat JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Halaman Detail Umum (Dipakai bergantian oleh Mobil dan Bodykit) -->
     <div id="detailContainer" class="hidden max-w-4xl mx-auto px-6 py-12 w-full flex-grow">
-        <button onclick="tampilKatalog()" class="mb-6 bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2">
-            &larr; Kembali ke Katalog
+        <button onclick="kembaliKeMenu()" class="mb-6 bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2">
+            &larr; Kembali
         </button>
         <div id="detailContent" class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700 p-6 md:p-8">
             <!-- Konten detail akan dirender di sini -->
@@ -59,75 +72,92 @@
 
     <!-- Skrip Aplikasi -->
     <script>
+        // --- KONFIGURASI SUPABASE (MOBIL) ---
         const SUPABASE_URL = 'https://ligbjputqpzubhbxmdia.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_-CWQKbOMRIot2AKjeZp8LA_P9ZsQeAf';
-
         let semuaDataMobil = [];
+        let menuAktif = 'mobil'; // Penanda menu yang sedang dibuka
+
+        // --- DATA STATIS BODYKIT (Contoh LBWK) ---
+        const dataBodykit = [
+            {
+                id: 1,
+                nama_bodykit: "Liberty Walk (LBWK)",
+                asal: "Nagoya, Jepang",
+                pendiri: "Wataru Kato",
+                sejarah: "Liberty Walk didirikan oleh Wataru Kato di Nagoya, Jepang. Terinspirasi dari gaya modifikasi 'Bosozoku' dan mobil balap siluet Jepang era 70-an, Kato-san menciptakan tren wide-body ekstrem. Ciri khas utama LBWK adalah overfender lebar yang dibaut langsung ke bodi asli mobil (bolt-on) hingga memperlihatkan kepala bautnya, memberikan kesan agresif dan tanpa kompromi. LBWK telah merevolusi dunia modifikasi, tak hanya pada JDM seperti Nissan GT-R, tapi juga mendobrak tabu dengan memotong fender supercar langka seperti Ferrari dan Lamborghini.",
+                foto_cover: "https://images.unsplash.com/photo-1620882814836-98ebdee58a43?auto=format&fit=crop&w=1000&q=80" // Bisa diganti gambar lokal nanti
+            },
+            {
+                id: 2,
+                nama_bodykit: "RAUH-Welt Begriff (RWB)",
+                asal: "Chiba, Jepang",
+                pendiri: "Akira Nakai",
+                sejarah: "RWB adalah garasi tuning Porsche khusus yang didirikan oleh Akira Nakai. Setiap mobil dibangun dan dipotong langsung oleh tangan Nakai-san sendiri tanpa bantuan mesin ukur digital, menciptakan karya seni mekanis yang memiliki roh dan jiwa balap jalanan klasik.",
+                foto_cover: "https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=1000&q=80"
+            }
+        ];
 
         async function ambilDataMobil() {
             const container = document.getElementById('mobilContainer');
-            
             try {
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/mobil?select=*&order=tahun.asc`, {
-                    headers: {
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': `Bearer ${SUPABASE_KEY}`
-                    }
+                    headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
                 });
-
-                if (!response.ok) {
-                    throw new Error(`Gagal mengambil data (Status: ${response.status})`);
-                }
-
+                if (!response.ok) throw new Error(`Gagal mengambil data`);
                 semuaDataMobil = await response.json();
+                renderKatalogMobil(semuaDataMobil);
 
-                if (!semuaDataMobil || semuaDataMobil.length === 0) {
-                    container.innerHTML = `<p class="text-gray-500 col-span-3 text-center">Belum ada data mobil di dalam database.</p>`;
-                    return;
-                }
-
-                renderKatalog(semuaDataMobil);
-
-                // Fitur Pencarian Real-Time
-                const searchInput = document.getElementById('searchInput');
-                searchInput.addEventListener('input', (e) => {
+                document.getElementById('searchInput').addEventListener('input', (e) => {
                     const term = e.target.value.toLowerCase();
-                    const filtered = semuaDataMobil.filter(m => 
-                        (m.nama_mobil + ' ' + m.pabrikan).toLowerCase().includes(term)
-                    );
-                    renderKatalog(filtered);
+                    const filtered = semuaDataMobil.filter(m => (m.nama_mobil + ' ' + m.pabrikan).toLowerCase().includes(term));
+                    renderKatalogMobil(filtered);
                 });
-
             } catch (error) {
                 container.innerHTML = `<p class="text-red-500 col-span-3 text-center">Gagal memuat database: ${error.message}</p>`;
             }
         }
 
-        // Fungsi pemanggilan gambar lokal dari GitHub
-        function getFotoMobil(nama) {
-            const n = nama.toLowerCase();
-            if (n.includes('skyline') || n.includes('r34') || n.includes('gt-r')) {
-                return './gtr.jpg';
-            } else if (n.includes('supra') || n.includes('a80')) {
-                return './supra.jpg';
-            } else if (n.includes('silvia') || n.includes('s15')) {
-                return './silvia.jpg';
-            } else if (n.includes('rx-7') || n.includes('rx7') || n.includes('mazda')) {
-                return './rx7.jpg';
-            } else if (n.includes('porsche') || n.includes('911')) {
-                return './porsche.jpg';
-            } else {
-                return 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
-            }
+        // --- FUNGSI TAMPILAN MENU ---
+        function tampilKatalogMobil() {
+            menuAktif = 'mobil';
+            document.getElementById('appContainer').classList.remove('hidden');
+            document.getElementById('bodykitContainer').classList.add('hidden');
+            document.getElementById('detailContainer').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function renderKatalog(data) {
+        function tampilKatalogBodykit() {
+            menuAktif = 'bodykit';
+            document.getElementById('appContainer').classList.add('hidden');
+            document.getElementById('detailContainer').classList.add('hidden');
+            document.getElementById('bodykitContainer').classList.remove('hidden');
+            
+            renderKatalogBodykit();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function kembaliKeMenu() {
+            if(menuAktif === 'mobil') tampilKatalogMobil();
+            else tampilKatalogBodykit();
+        }
+
+        // --- FUNGSI RENDER KATALOG ---
+        function getFotoMobil(nama) {
+            const n = nama.toLowerCase();
+            if (n.includes('skyline') || n.includes('r34') || n.includes('gt-r')) return './gtr.jpg';
+            else if (n.includes('supra') || n.includes('a80')) return './supra.jpg';
+            else if (n.includes('silvia') || n.includes('s15')) return './silvia.jpg';
+            else if (n.includes('rx-7') || n.includes('rx7') || n.includes('mazda')) return './rx7.jpg';
+            else if (n.includes('porsche') || n.includes('911')) return './porsche.jpg';
+            else return 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
+        }
+
+        function renderKatalogMobil(data) {
             const container = document.getElementById('mobilContainer');
             container.innerHTML = '';
-
             data.forEach(mobil => {
                 const fotoUrl = getFotoMobil(mobil.nama_mobil);
-
                 container.innerHTML += `
                     <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
                         <img src="${fotoUrl}" alt="${mobil.nama_mobil}" class="h-48 w-full object-cover">
@@ -137,43 +167,70 @@
                                 <h4 class="text-xl font-bold mt-3 mb-2">${mobil.nama_mobil}</h4>
                                 <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">${mobil.sejarah}</p>
                             </div>
-                            <button onclick="bukaDetail(${mobil.id})" class="w-full text-center bg-red-600 hover:bg-red-700 text-white font-semibold text-sm py-2.5 rounded-lg transition">Baca Sejarah Lengkap &rarr;</button>
+                            <button onclick="bukaDetailMobil(${mobil.id})" class="w-full text-center bg-red-600 hover:bg-red-700 text-white font-semibold text-sm py-2.5 rounded-lg transition">Baca Sejarah &rarr;</button>
                         </div>
                     </div>
                 `;
             });
         }
 
-        function bukaDetail(id) {
+        function renderKatalogBodykit() {
+            const container = document.getElementById('katalogBodykitGrid');
+            container.innerHTML = '';
+            dataBodykit.forEach(kit => {
+                container.innerHTML += `
+                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
+                        <img src="${kit.foto_cover}" alt="${kit.nama_bodykit}" class="h-48 w-full object-cover grayscale hover:grayscale-0 transition duration-500">
+                        <div class="p-5 flex flex-col flex-grow justify-between">
+                            <div>
+                                <span class="text-xs bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2.5 py-1 rounded-full font-semibold">Tuner: ${kit.pendiri}</span>
+                                <h4 class="text-xl font-bold mt-3 mb-2">${kit.nama_bodykit}</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">${kit.sejarah}</p>
+                            </div>
+                            <button onclick="bukaDetailBodykit(${kit.id})" class="w-full text-center bg-gray-800 hover:bg-black dark:hover:bg-gray-600 text-white font-semibold text-sm py-2.5 rounded-lg transition">Jelajahi Karya &rarr;</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        // --- FUNGSI BUKA DETAIL ---
+        function bukaDetailMobil(id) {
             const mobil = semuaDataMobil.find(m => m.id === id);
             if (!mobil) return;
-
             const fotoUrl = getFotoMobil(mobil.nama_mobil);
 
             document.getElementById('appContainer').classList.add('hidden');
-            const detailContainer = document.getElementById('detailContainer');
-            detailContainer.classList.remove('hidden');
+            document.getElementById('detailContainer').classList.remove('hidden');
 
-            const detailContent = document.getElementById('detailContent');
-            detailContent.innerHTML = `
+            document.getElementById('detailContent').innerHTML = `
                 <span class="text-xs bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 px-3 py-1 rounded-full font-semibold">${mobil.pabrikan} • Tahun ${mobil.tahun}</span>
                 <h2 class="text-3xl md:text-4xl font-extrabold mt-3 mb-6">${mobil.nama_mobil}</h2>
-                <div class="rounded-xl overflow-hidden shadow-lg mb-6">
-                    <img src="${fotoUrl}" alt="${mobil.nama_mobil}" class="w-full h-72 md:h-96 object-cover">
-                </div>
+                <div class="rounded-xl overflow-hidden shadow-lg mb-6"><img src="${fotoUrl}" class="w-full h-72 md:h-96 object-cover"></div>
                 <h3 class="text-xl font-bold mb-3 text-red-600 dark:text-red-400">Latar Belakang & Sejarah</h3>
                 <p class="text-base text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${mobil.sejarah}</p>
             `;
-
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function tampilKatalog() {
-            document.getElementById('detailContainer').classList.add('hidden');
-            document.getElementById('appContainer').classList.remove('hidden');
+        function bukaDetailBodykit(id) {
+            const kit = dataBodykit.find(k => k.id === id);
+            if (!kit) return;
+
+            document.getElementById('bodykitContainer').classList.add('hidden');
+            document.getElementById('detailContainer').classList.remove('hidden');
+
+            document.getElementById('detailContent').innerHTML = `
+                <span class="text-xs bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-3 py-1 rounded-full font-semibold">Asal: ${kit.asal} • Pendiri: ${kit.pendiri}</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold mt-3 mb-6">${kit.nama_bodykit}</h2>
+                <div class="rounded-xl overflow-hidden shadow-lg mb-6"><img src="${kit.foto_cover}" class="w-full h-72 md:h-96 object-cover"></div>
+                <h3 class="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Sejarah & Filosofi Desain</h3>
+                <p class="text-base text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${kit.sejarah}</p>
+            `;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Mulai aplikasi
         ambilDataMobil();
     </script>
 </body>
