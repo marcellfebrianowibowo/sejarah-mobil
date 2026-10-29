@@ -78,7 +78,7 @@
         let semuaDataMobil = [];
         let menuAktif = 'mobil'; // Penanda menu yang sedang dibuka
 
-        // --- DATA STATIS BODYKIT (Contoh LBWK) ---
+        // --- DATA STATIS BODYKIT ---
         const dataBodykit = [
             {
                 id: 1,
@@ -86,7 +86,7 @@
                 asal: "Nagoya, Jepang",
                 pendiri: "Wataru Kato",
                 sejarah: "Liberty Walk didirikan oleh Wataru Kato di Nagoya, Jepang. Terinspirasi dari gaya modifikasi 'Bosozoku' dan mobil balap siluet Jepang era 70-an, Kato-san menciptakan tren wide-body ekstrem. Ciri khas utama LBWK adalah overfender lebar yang dibaut langsung ke bodi asli mobil (bolt-on) hingga memperlihatkan kepala bautnya, memberikan kesan agresif dan tanpa kompromi. LBWK telah merevolusi dunia modifikasi, tak hanya pada JDM seperti Nissan GT-R, tapi juga mendobrak tabu dengan memotong fender supercar langka seperti Ferrari dan Lamborghini.",
-                foto_cover: "https://images.unsplash.com/photo-1620882814836-98ebdee58a43?auto=format&fit=crop&w=1000&q=80" // Bisa diganti gambar lokal nanti
+                foto_cover: "./lbwk-logo.jpg" // Menggunakan file logo yang baru Anda unggah
             },
             {
                 id: 2,
@@ -180,7 +180,8 @@
             dataBodykit.forEach(kit => {
                 container.innerHTML += `
                     <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
-                        <img src="${kit.foto_cover}" alt="${kit.nama_bodykit}" class="h-48 w-full object-cover grayscale hover:grayscale-0 transition duration-500">
+                        <!-- class diubah menjadi object-contain bg-white dan ditambah padding (p-4) agar logo rapi -->
+                        <img src="${kit.foto_cover}" alt="${kit.nama_bodykit}" class="h-48 w-full object-contain bg-white grayscale hover:grayscale-0 transition duration-500 p-4">
                         <div class="p-5 flex flex-col flex-grow justify-between">
                             <div>
                                 <span class="text-xs bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2.5 py-1 rounded-full font-semibold">Tuner: ${kit.pendiri}</span>
@@ -223,7 +224,8 @@
             document.getElementById('detailContent').innerHTML = `
                 <span class="text-xs bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-3 py-1 rounded-full font-semibold">Asal: ${kit.asal} • Pendiri: ${kit.pendiri}</span>
                 <h2 class="text-3xl md:text-4xl font-extrabold mt-3 mb-6">${kit.nama_bodykit}</h2>
-                <div class="rounded-xl overflow-hidden shadow-lg mb-6"><img src="${kit.foto_cover}" class="w-full h-72 md:h-96 object-cover"></div>
+                <!-- Tampilan detail untuk logo juga diubah menjadi object-contain bg-white -->
+                <div class="rounded-xl overflow-hidden shadow-lg mb-6"><img src="${kit.foto_cover}" class="w-full h-72 md:h-96 object-contain bg-white p-4"></div>
                 <h3 class="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Sejarah & Filosofi Desain</h3>
                 <p class="text-base text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${kit.sejarah}</p>
             `;
