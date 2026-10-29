@@ -78,7 +78,7 @@
         let semuaDataMobil = [];
         let menuAktif = 'mobil'; 
 
-        // --- DATA STATIS BODYKIT (Sejarah LBWK Diperbarui) ---
+        // --- DATA STATIS BODYKIT ---
         const dataBodykit = [
             {
                 id: 1,
@@ -92,7 +92,13 @@ Gaya modifikasi LBWK sangat kental terinspirasi dari budaya balap jalanan klasik
 Gebrakan terbesar yang membuat nama Liberty Walk meledak di kancah global terjadi ketika Kato-san mendobrak "tabu" dan aturan suci dunia otomotif: ia dengan santai memotong bodi mulus supercar Eropa seharga miliaran rupiah seperti Lamborghini Murcielago, Lamborghini Aventador, dan Ferrari 458. Tindakan ekstrem ini sempat memicu kemarahan para purist (kaum pecinta mobil orisinal), namun di sisi lain, justru keberanian inilah yang membuat LBWK dipuja sebagai dewa oleh para penggemar custom culture di seluruh dunia.
 
 Selain supercar Eropa, LBWK tentu saja melahirkan mahakarya memukau untuk deretan legenda JDM, mulai dari Nissan GT-R (R35), Skyline Hakosuka, Mazda RX-7, hingga Toyota Supra. Dengan mengusung semboyan filosofis "Imagine all the people living life in peace" yang terinspirasi dari lagu John Lennon, Wataru Kato menegaskan bahwa modifikasi LBWK bukan sekadar mencari kecepatan di sirkuit. Ini adalah tentang kebebasan berekspresi tanpa batas, mendobrak aturan, dan menghadirkan senyuman bagi siapa saja yang melihat mobil-mobil spektakuler tersebut melintas di jalanan.`,
-                foto_cover: "./lbwk-logo.jpg" 
+                foto_cover: "./lbwk-logo.jpg",
+                // TAMBAHAN: Galeri Foto Mobil LBWK
+                galeri: [
+                    "https://images.unsplash.com/photo-1620882814836-98ebdee58a43?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1594070319944-7c0c85c2901a?auto=format&fit=crop&w=800&q=80",
+                    "https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&w=800&q=80"
+                ]
             },
             {
                 id: 2,
@@ -100,7 +106,8 @@ Selain supercar Eropa, LBWK tentu saja melahirkan mahakarya memukau untuk dereta
                 asal: "Chiba, Jepang",
                 pendiri: "Akira Nakai",
                 sejarah: `RWB adalah garasi tuning Porsche khusus yang didirikan oleh Akira Nakai. Setiap mobil dibangun dan dipotong langsung oleh tangan Nakai-san sendiri tanpa bantuan mesin ukur digital, menciptakan karya seni mekanis yang memiliki roh dan jiwa balap jalanan klasik.`,
-                foto_cover: "https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=1000&q=80"
+                foto_cover: "https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=1000&q=80",
+                galeri: [] // Kosong, tidak akan menampilkan galeri
             }
         ];
 
@@ -226,12 +233,24 @@ Selain supercar Eropa, LBWK tentu saja melahirkan mahakarya memukau untuk dereta
             document.getElementById('bodykitContainer').classList.add('hidden');
             document.getElementById('detailContainer').classList.remove('hidden');
 
+            // Cek apakah ada galeri foto
+            let galeriHTML = '';
+            if (kit.galeri && kit.galeri.length > 0) {
+                galeriHTML = `
+                    <h3 class="text-xl font-bold mt-10 mb-4 text-gray-800 dark:text-gray-200 border-t border-gray-200 dark:border-gray-700 pt-6">Galeri Karya ${kit.nama_bodykit}</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                        ${kit.galeri.map(foto => `<img src="${foto}" alt="Mobil LBWK" class="w-full h-48 object-cover rounded-xl shadow-md hover:scale-105 transition-transform duration-300 cursor-pointer">`).join('')}
+                    </div>
+                `;
+            }
+
             document.getElementById('detailContent').innerHTML = `
                 <span class="text-xs bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-3 py-1 rounded-full font-semibold">Asal: ${kit.asal} • Pendiri: ${kit.pendiri}</span>
                 <h2 class="text-3xl md:text-4xl font-extrabold mt-3 mb-6">${kit.nama_bodykit}</h2>
                 <div class="rounded-xl overflow-hidden shadow-lg mb-6"><img src="${kit.foto_cover}" class="w-full h-72 md:h-96 object-contain bg-white p-4"></div>
                 <h3 class="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Sejarah & Filosofi Desain</h3>
                 <p class="text-base text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${kit.sejarah}</p>
+                ${galeriHTML}
             `;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
