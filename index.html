@@ -19,9 +19,9 @@
         </div>
     </nav>
 
-    <!-- Konten Utama (Bisa Berganti antara Katalog dan Detail) -->
+    <!-- Konten Utama -->
     <div id="appContainer">
-        <!-- Hero Section (Hanya tampil di Katalog) -->
+        <!-- Hero Section -->
         <header id="heroSection" class="bg-cover bg-center py-20 px-6 text-center bg-gray-800 text-white" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80');">
             <h2 class="text-4xl font-extrabold mb-4">Jejak Sejarah Mobil Legendaris Dunia</h2>
             <p class="max-w-xl mx-auto text-gray-300 mb-6">Eksplorasi evolusi, performa, dan latar belakang sejarah kendaraan ikonik berbasis Cloud Database.</p>
@@ -42,13 +42,13 @@
         </main>
     </div>
 
-    <!-- Halaman Detail Sejarah (Hidden secara default) -->
+    <!-- Halaman Detail Sejarah -->
     <div id="detailContainer" class="hidden max-w-4xl mx-auto px-6 py-12 w-full flex-grow">
         <button onclick="tampilKatalog()" class="mb-6 bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2">
             &larr; Kembali ke Katalog
         </button>
         <div id="detailContent" class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700 p-6 md:p-8">
-            <!-- Konten detail akan dirender di sini lewat JavaScript -->
+            <!-- Konten detail akan dirender di sini -->
         </div>
     </div>
 
@@ -103,20 +103,29 @@
             }
         }
 
+        // Fungsi khusus foto bertema Fast & Furious
+        function getFotoMobil(nama) {
+            const n = nama.toLowerCase();
+            if (n.includes('skyline') || n.includes('r34') || n.includes('gt-r')) {
+                // Nissan Skyline GT-R R34 (Fast & Furious Blue Livery)
+                return 'https://images.unsplash.com/photo-1600712242805-5f78671b24da?auto=format&fit=crop&w=1000&q=80';
+            } else if (n.includes('supra') || n.includes('a80')) {
+                // Toyota Supra MK4 (Fast & Furious Orange / Classic Style)
+                return 'https://images.unsplash.com/photo-1582599658252-8706346743b8?auto=format&fit=crop&w=1000&q=80';
+            } else if (n.includes('rx-7') || n.includes('mazda')) {
+                // Mazda RX-7
+                return 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1000&q=80';
+            } else {
+                return 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
+            }
+        }
+
         function renderKatalog(data) {
             const container = document.getElementById('mobilContainer');
             container.innerHTML = '';
 
             data.forEach(mobil => {
-                // Gambar ilustrasi otomatis berdasarkan nama/pabrikan jika belum ada kolom foto khusus
-                let fotoUrl = 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=800&q=80';
-                if(mobil.nama_mobil.toLowerCase().includes('supra')) {
-                    fotoUrl = 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80';
-                } else if(mobil.nama_mobil.toLowerCase().includes('skyline')) {
-                    fotoUrl = 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80';
-                } else if(mobil.nama_mobil.toLowerCase().includes('rx-7')) {
-                    fotoUrl = 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=800&q=80';
-                }
+                const fotoUrl = getFotoMobil(mobil.nama_mobil);
 
                 container.innerHTML += `
                     <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
@@ -138,16 +147,8 @@
             const mobil = semuaDataMobil.find(m => m.id === id);
             if (!mobil) return;
 
-            let fotoUrl = 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
-            if(mobil.nama_mobil.toLowerCase().includes('supra')) {
-                fotoUrl = 'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1000&q=80';
-            } else if(mobil.nama_mobil.toLowerCase().includes('skyline')) {
-                fotoUrl = 'https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=1000&q=80';
-            } else if(mobil.nama_mobil.toLowerCase().includes('rx-7')) {
-                fotoUrl = 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1000&q=80';
-            }
+            const fotoUrl = getFotoMobil(mobil.nama_mobil);
 
-            // Sembunyikan katalog & hero, tampilkan halaman detail
             document.getElementById('appContainer').classList.add('hidden');
             const detailContainer = document.getElementById('detailContainer');
             detailContainer.classList.remove('hidden');
