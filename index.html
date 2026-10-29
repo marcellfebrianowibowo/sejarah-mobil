@@ -93,11 +93,12 @@ Gebrakan terbesar yang membuat nama Liberty Walk meledak di kancah global terjad
 
 Selain supercar Eropa, LBWK tentu saja melahirkan mahakarya memukau untuk deretan legenda JDM, mulai dari Nissan GT-R (R35), Skyline Hakosuka, Mazda RX-7, hingga Toyota Supra. Dengan mengusung semboyan filosofis "Imagine all the people living life in peace" yang terinspirasi dari lagu John Lennon, Wataru Kato menegaskan bahwa modifikasi LBWK bukan sekadar mencari kecepatan di sirkuit. Ini adalah tentang kebebasan berekspresi tanpa batas, mendobrak aturan, dan menghadirkan senyuman bagi siapa saja yang melihat mobil-mobil spektakuler tersebut melintas di jalanan.`,
                 foto_cover: "./lbwk-logo.jpg",
-                // TAMBAHAN: Galeri Foto Mobil LBWK
+                // Galeri menggunakan foto lokal yang Anda siapkan
                 galeri: [
-                    "https://images.unsplash.com/photo-1620882814836-98ebdee58a43?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1594070319944-7c0c85c2901a?auto=format&fit=crop&w=800&q=80",
-                    "https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&w=800&q=80"
+                    "./lbwk1.jpg",
+                    "./lbwk2.jpg",
+                    "./lbwk3.jpg",
+                    "./lbwk4.jpg"
                 ]
             },
             {
@@ -107,7 +108,7 @@ Selain supercar Eropa, LBWK tentu saja melahirkan mahakarya memukau untuk dereta
                 pendiri: "Akira Nakai",
                 sejarah: `RWB adalah garasi tuning Porsche khusus yang didirikan oleh Akira Nakai. Setiap mobil dibangun dan dipotong langsung oleh tangan Nakai-san sendiri tanpa bantuan mesin ukur digital, menciptakan karya seni mekanis yang memiliki roh dan jiwa balap jalanan klasik.`,
                 foto_cover: "https://images.unsplash.com/photo-1614200179396-2bdb77ebf81b?auto=format&fit=crop&w=1000&q=80",
-                galeri: [] // Kosong, tidak akan menampilkan galeri
+                galeri: [] 
             }
         ];
 
@@ -233,13 +234,13 @@ Selain supercar Eropa, LBWK tentu saja melahirkan mahakarya memukau untuk dereta
             document.getElementById('bodykitContainer').classList.add('hidden');
             document.getElementById('detailContainer').classList.remove('hidden');
 
-            // Cek apakah ada galeri foto
+            // Susunan Grid 2x2 yang pas untuk 4 foto
             let galeriHTML = '';
             if (kit.galeri && kit.galeri.length > 0) {
                 galeriHTML = `
                     <h3 class="text-xl font-bold mt-10 mb-4 text-gray-800 dark:text-gray-200 border-t border-gray-200 dark:border-gray-700 pt-6">Galeri Karya ${kit.nama_bodykit}</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        ${kit.galeri.map(foto => `<img src="${foto}" alt="Mobil LBWK" class="w-full h-48 object-cover rounded-xl shadow-md hover:scale-105 transition-transform duration-300 cursor-pointer">`).join('')}
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        ${kit.galeri.map(foto => `<img src="${foto}" alt="Karya LBWK" class="w-full h-56 md:h-64 object-cover rounded-xl shadow-md hover:scale-105 transition-transform duration-300 cursor-pointer">`).join('')}
                     </div>
                 `;
             }
