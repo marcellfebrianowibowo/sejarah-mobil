@@ -108,10 +108,7 @@ Kecintaannya pada otomotif mengalami titik balik besar ketika ia bekerja di sebu
 
 Ciri khas absolut dari setiap kreasi RWB adalah fender super lebar (wide-body) beraliran ekstrem yang dibaut secara kasar ke bodi asli, sayap belakang berukuran raksasa tipe 'ducktail' atau GT-wing yang menjulang tinggi, velg custom ber-offset super dalam (deep dish), serta fitment suspensi yang ceper nyaris menyentuh aspal. Desain ini menggabungkan keanggunan garis bodi mobil sport Eropa klasik dengan kebrutalan kultur balap jalanan Jepang.
 
-Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekadar bentuk fisiknya, melainkan proses spiritual pembuatannya. Nakai-san menolak produksi massal. Ia secara eksklusif terbang sendirian ke seluruh penjuru dunia (Amerika, Eropa, Asia) untuk membangun setiap mobil kliennya secara langsung dengan tangannya sendiri. Ia tidak pernah menggunakan alat ukur digital, laser, atau komputer 3D. Semua proses pemotongan fender asli Porsche yang harganya selangit itu dilakukan hanya dengan mengandalkan insting tajamnya, sepotong lakban kertas sebagai penanda, dan mata telanjangnya.
-
-Seringkali Nakai-san bekerja dalam diam, merokok tanpa henti, dan menyelesaikan satu mobil dalam waktu beberapa hari berturut-turut nyaris tanpa istirahat panjang. Dedikasi tingkat tinggi dan sentuhan personal inilah yang membuat RWB sangat dihormati. Pada akhir proses pembuatannya, Nakai-san selalu memberikan "nama" khusus pada tiap mobil buatannya, membuat Porsche RWB bukan lagi sekadar mobil modifikasi, melainkan sebuah karya seni mekanis bernyawa yang memiliki jiwa, identitas, dan sangat eksklusif.`,
-                // File-file ini sudah sesuai dengan yang Anda unggah di GitHub
+Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekadar bentuk fisiknya, melainkan proses spiritual pembuatannya. Nakai-san menolak produksi massal. Ia secara eksklusif terbang sendirian ke seluruh penjuru dunia (Amerika, Eropa, Asia) untuk membangun setiap mobil kliennya secara langsung dengan tangannya sendiri. Ia tidak pernah menggunakan alat ukur digital, laser, atau komputer 3D. Semua proses pemotongan fender asli Porsche yang harganya selangit itu dilakukan hanya dengan mengandalkan insting tajamnya, sepotong lakban kertas sebagai penanda, dan mata telanjangnya.`,
                 foto_cover: "./rwb-logo.jpg",
                 galeri: [
                     "./rwb1.jpg", 
@@ -142,6 +139,58 @@ Seringkali Nakai-san bekerja dalam diam, merokok tanpa henti, dan menyelesaikan 
             }
         }
 
+        // --- FUNGSI PEMANGGILAN GATOTO LOKAL LENGKAP ---
+        function getFotoMobil(nama) {
+            const n = nama.toLowerCase();
+
+            // 1. Nissan GT-R / Skyline Series
+            if (n.includes('r32')) return './r32.jpg';
+            if (n.includes('hakosuka') || n.includes('2000gt-r')) return './hakosuka.jpg';
+            if (n.includes('r34') || n.includes('skyline') || n.includes('gt-r')) return './gtr.jpg';
+
+            // 2. Nissan Z & Silvia Series
+            if (n.includes('240z') || n.includes('s30')) return './240z.jpg';
+            if (n.includes('350z') || n.includes('z33')) return './350z.jpg';
+            if (n.includes('180sx') || n.includes('rps13')) return './180sx.jpg';
+            if (n.includes('s14')) return './s14.jpg';
+            if (n.includes('silvia') || n.includes('s15')) return './silvia.jpg';
+
+            // 3. Toyota Series
+            if (n.includes('a70')) return './a70.jpg';
+            if (n.includes('supra') || n.includes('a80')) return './supra.jpg';
+            if (n.includes('chaser') || n.includes('jzx100')) return './chaser.jpg';
+            if (n.includes('mr2') || n.includes('sw20')) return './mr2.jpg';
+            if (n.includes('celica') || n.includes('st205')) return './celica.jpg';
+            if (n.includes('ae86') || n.includes('trueno')) return './ae86.jpg';
+            if (n.includes('86') || n.includes('brz')) return './gt86.jpg';
+            if (n.includes('crown')) return './crown.jpg';
+
+            // 4. Honda Series
+            if (n.includes('ek9') || n.includes('civic')) return './ek9.jpg';
+            if (n.includes('dc2') || n.includes('integra')) return './dc2.jpg';
+            if (n.includes('nsx')) return './nsx.jpg';
+            if (n.includes('s2000')) return './s2000.jpg';
+
+            // 5. Mazda Series
+            if (n.includes('miata') || n.includes('mx-5') || n.includes('mx5')) return './miata.jpg';
+            if (n.includes('az-1') || n.includes('az1') || n.includes('autozam')) return './az1.jpg';
+            if (n.includes('rx-7') || n.includes('rx7') || n.includes('mazda')) return './rx7.jpg';
+
+            // 6. Mitsubishi Series
+            if (n.includes('3000gt') || n.includes('vr-4')) return './3000gt.jpg';
+            if (n.includes('eclipse')) return './eclipse.jpg';
+            if (n.includes('evo') || n.includes('lancer')) return './evo.jpg';
+
+            // 7. Subaru, Lexus & European Legends
+            if (n.includes('22b')) return './22b.jpg';
+            if (n.includes('impreza') || n.includes('wrx')) return './impreza.jpg';
+            if (n.includes('lfa') || n.includes('lexus')) return './lfa.jpg';
+            if (n.includes('porsche') || n.includes('911')) return './porsche.jpg';
+
+            // Gambar cadangan default jika file belum diunggah
+            return 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
+        }
+
         // --- FUNGSI TAMPILAN MENU ---
         function tampilKatalogMobil() {
             menuAktif = 'mobil';
@@ -167,16 +216,6 @@ Seringkali Nakai-san bekerja dalam diam, merokok tanpa henti, dan menyelesaikan 
         }
 
         // --- FUNGSI RENDER KATALOG ---
-        function getFotoMobil(nama) {
-            const n = nama.toLowerCase();
-            if (n.includes('skyline') || n.includes('r34') || n.includes('gt-r')) return './gtr.jpg';
-            else if (n.includes('supra') || n.includes('a80')) return './supra.jpg';
-            else if (n.includes('silvia') || n.includes('s15')) return './silvia.jpg';
-            else if (n.includes('rx-7') || n.includes('rx7') || n.includes('mazda')) return './rx7.jpg';
-            else if (n.includes('porsche') || n.includes('911')) return './porsche.jpg';
-            else return 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
-        }
-
         function renderKatalogMobil(data) {
             const container = document.getElementById('mobilContainer');
             container.innerHTML = '';
@@ -265,6 +304,7 @@ Seringkali Nakai-san bekerja dalam diam, merokok tanpa henti, dan menyelesaikan 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        // Jalankan aplikasi saat halaman dimuat
         ambilDataMobil();
     </script>
 </body>
