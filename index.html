@@ -103,18 +103,21 @@
             }
         }
 
-        // Fungsi yang memanggil gambar lokal Anda
+        // Fungsi yang memanggil gambar lokal sesuai nama mobil
         function getFotoMobil(nama) {
             const n = nama.toLowerCase();
             if (n.includes('skyline') || n.includes('r34') || n.includes('gt-r')) {
-                // Memanggil file gtr.jpg dari GitHub Anda
                 return './gtr.jpg';
             } else if (n.includes('supra') || n.includes('a80')) {
-                // Memanggil file supra.jpg dari GitHub Anda
                 return './supra.jpg';
-            } else if (n.includes('rx-7') || n.includes('mazda')) {
-                return 'https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&fit=crop&w=1000&q=80';
+            } else if (n.includes('silvia') || n.includes('s15')) {
+                // Memanggil file silvia.jpg dari GitHub
+                return './silvia.jpg';
+            } else if (n.includes('rx-7') || n.includes('rx7') || n.includes('mazda')) {
+                // Memanggil file rx7.jpg dari GitHub
+                return './rx7.jpg';
             } else {
+                // Gambar default jika mobil tidak dikenali
                 return 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
             }
         }
