@@ -96,50 +96,117 @@
         </div>
     </header>
 
-    <!-- TAMPILAN BERANDA (PILIH KATEGORI) DENGAN BACKGROUND FOTO bg-utama.jpg -->
-    <section id="homeContainer" class="flex-grow pt-32 pb-20 flex flex-col justify-center items-center px-6 bg-cover bg-center bg-fixed" style="background-image: linear-gradient(rgba(9, 11, 14, 0.85), rgba(9, 11, 14, 0.95)), url('./bg-utama.jpg');">
-        <div class="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
-            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-brand-red/10 border border-brand-red/30 mb-6 backdrop-blur-md">
-                <span class="w-2 h-2 rounded-full bg-brand-red animate-pulse"></span>
-                <span class="text-xs uppercase tracking-widest font-bold text-brand-red">ENSIKLOPEDIA OTOMOTIF JDM • HERITAGE ARCHIVE</span>
-            </div>
-            
-            <h1 class="text-3xl sm:text-5xl font-heading font-black tracking-tight text-white uppercase max-w-4xl leading-tight">
-                Pilih Kategori Eksplorasi Arsip Legendaris
-            </h1>
-            
-            <p class="mt-4 text-sm sm:text-base text-gray-300 max-w-2xl">
-                Selamat datang di Garasi Legenda. Pilih jalur penelusuran Anda untuk menyingkap spesifikasi mobil sport atau evolusi seni aerodinamika sasis.
-            </p>
+    <!-- TAMPILAN BERANDA UTAMA (DENGAN BACKGROUND FOTO bg-utama.jpg & BAGIAN EVOLUSI SEJARAH) -->
+    <div id="homeContainer" class="flex-grow flex flex-col justify-start w-full">
+        
+        <!-- Hero Section Atas -->
+        <section class="pt-32 pb-20 flex flex-col justify-center items-center px-6 bg-cover bg-center bg-fixed border-b border-brand-border" style="background-image: linear-gradient(rgba(9, 11, 14, 0.85), rgba(9, 11, 14, 0.95)), url('./bg-utama.jpg');">
+            <div class="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
+                <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-brand-red/10 border border-brand-red/30 mb-6 backdrop-blur-md">
+                    <span class="w-2 h-2 rounded-full bg-brand-red animate-pulse"></span>
+                    <span class="text-xs uppercase tracking-widest font-bold text-brand-red">ENSIKLOPEDIA OTOMOTIF JDM • HERITAGE ARCHIVE</span>
+                </div>
+                
+                <h1 class="text-3xl sm:text-5xl font-heading font-black tracking-tight text-white uppercase max-w-4xl leading-tight">
+                    Pilih Kategori Eksplorasi Arsip Legendaris
+                </h1>
+                
+                <p class="mt-4 text-sm sm:text-base text-gray-300 max-w-2xl">
+                    Selamat datang di Garasi Legenda. Pilih jalur penelusuran Anda untuk menyingkap spesifikasi mobil sport atau evolusi seni aerodinamika sasis.
+                </p>
 
-            <!-- 2 Kartu Utama di Tengah -->
-            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl text-left">
-                <!-- Kartu Katalog Mobil -->
-                <div onclick="tampilKatalogMobil()" class="group relative rounded-3xl bg-brand-slatecard border border-brand-border/90 overflow-hidden transition-all duration-300 neon-border-hover cursor-pointer flex flex-col justify-between p-8 h-80 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(17,21,28,0.95), rgba(17,21,28,0.6)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80');">
-                    <div>
-                        <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-brand-red text-white rounded-md">DATABASE CLOUD</span>
-                        <h3 class="text-2xl font-heading font-black text-white group-hover:text-brand-red transition mt-3">Katalog Mobil Legendaris</h3>
-                        <p class="mt-2 text-xs text-gray-300 line-clamp-2">Jelajahi sejarah mendalam, blueprint mesin ikonik (RB26, 2JZ), dan performa puluhan mobil sport.</p>
+                <!-- 2 Kartu Utama di Tengah -->
+                <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl text-left">
+                    <!-- Kartu Katalog Mobil -->
+                    <div onclick="tampilKatalogMobil()" class="group relative rounded-3xl bg-brand-slatecard border border-brand-border/90 overflow-hidden transition-all duration-300 neon-border-hover cursor-pointer flex flex-col justify-between p-8 h-80 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(17,21,28,0.95), rgba(17,21,28,0.6)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80');">
+                        <div>
+                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-brand-red text-white rounded-md">DATABASE CLOUD</span>
+                            <h3 class="text-2xl font-heading font-black text-white group-hover:text-brand-red transition mt-3">Katalog Mobil Legendaris</h3>
+                            <p class="mt-2 text-xs text-gray-300 line-clamp-2">Jelajahi sejarah mendalam, blueprint mesin ikonik (RB26, 2JZ), dan performa puluhan mobil sport.</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm font-bold text-brand-red group-hover:translate-x-2 transition">
+                            Buka Katalog Mobil &rarr;
+                        </div>
                     </div>
-                    <div class="flex items-center gap-2 text-sm font-bold text-brand-red group-hover:translate-x-2 transition">
-                        Buka Katalog Mobil &rarr;
+
+                    <!-- Kartu Sejarah Bodykit (Menggunakan bodykit.jpg) -->
+                    <div onclick="tampilKatalogBodykit()" class="group relative rounded-3xl bg-brand-blueprint/30 border border-cyan-900/50 overflow-hidden transition-all duration-300 neon-cyan-hover cursor-pointer flex flex-col justify-between p-8 h-80 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(10,37,64,0.95), rgba(10,37,64,0.6)), url('./bodykit.jpg');">
+                        <div>
+                            <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-sky-500/20 text-sky-400 border border-sky-400/30 rounded-md">CUSTOM CULTURE</span>
+                            <h3 class="text-2xl font-heading font-black text-white group-hover:text-sky-400 transition mt-3">Sejarah Bodykit & Tuner</h3>
+                            <p class="mt-2 text-xs text-gray-300 line-clamp-2">Mengenal mahakarya wide-body riveted, filosofi aerodinamika RWB, LBWK, hingga Top Secret.</p>
+                        </div>
+                        <div class="flex items-center gap-2 text-sm font-bold text-sky-400 group-hover:translate-x-2 transition">
+                            Jelajahi Sejarah Bodykit &rarr;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BAGIAN TAMBAHAN: EVOLUSI SEJARAH MOBIL DARI MASA KE MASA -->
+        <section class="py-20 max-w-7xl mx-auto px-6 w-full">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-xs uppercase tracking-widest font-bold text-brand-red block mb-2">CHRONOLOGICAL HERITAGE</span>
+                <h2 class="text-3xl sm:text-4xl font-heading font-black text-white">Evolusi Otomotif: Dari Roda Uap Hingga Era JDM Modern</h2>
+                <p class="text-sm text-gray-400 mt-3">Kilas balik perjalanan peradaban mesin pembakaran internal dan metamorfosis industri mobil sport dunia.</p>
+            </div>
+
+            <!-- Grid Timeline Evolusi -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Era 1 -->
+                <div class="bg-brand-slatecard rounded-2xl border border-brand-border p-6 flex flex-col justify-between group hover:border-brand-red/60 transition">
+                    <div>
+                        <div class="h-40 rounded-xl overflow-hidden mb-5 border border-brand-border bg-black">
+                            <img src="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=600&q=80" alt="Era Klasik" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <span class="text-[10px] font-mono bg-brand-red/10 text-brand-red px-2.5 py-1 rounded-md font-bold">1769 — 1900an</span>
+                        <h3 class="text-lg font-heading font-bold text-white mt-3 mb-2">Kelahiran & Mesin Uap</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Dimulai dari penemuan kendaraan bermesin uap pertama di dunia hingga Karl Benz mematenkan mobil berbahan bakar bensin beroda tiga yang menjadi fondasi otomotif modern.</p>
                     </div>
                 </div>
 
-                <!-- Kartu Sejarah Bodykit (Menggunakan bodykit.jpg) -->
-                <div onclick="tampilKatalogBodykit()" class="group relative rounded-3xl bg-brand-blueprint/30 border border-cyan-900/50 overflow-hidden transition-all duration-300 neon-cyan-hover cursor-pointer flex flex-col justify-between p-8 h-80 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(10,37,64,0.95), rgba(10,37,64,0.6)), url('./bodykit.jpg');">
+                <!-- Era 2 -->
+                <div class="bg-brand-slatecard rounded-2xl border border-brand-border p-6 flex flex-col justify-between group hover:border-sky-500/60 transition">
                     <div>
-                        <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-sky-500/20 text-sky-400 border border-sky-400/30 rounded-md">CUSTOM CULTURE</span>
-                        <h3 class="text-2xl font-heading font-black text-white group-hover:text-sky-400 transition mt-3">Sejarah Bodykit & Tuner</h3>
-                        <p class="mt-2 text-xs text-gray-300 line-clamp-2">Mengenal mahakarya wide-body riveted, filosofi aerodinamika RWB, LBWK, hingga Top Secret.</p>
-                    </div>
-                    <div class="flex items-center gap-2 text-sm font-bold text-sky-400 group-hover:translate-x-2 transition">
-                        Jelajahi Sejarah Bodykit &rarr;
+                        <div class="h-40 rounded-xl overflow-hidden mb-5 border border-brand-border bg-black">
+                            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80" alt="Era Produksi Massal" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <span class="text-[10px] font-mono bg-sky-500/10 text-sky-400 px-2.5 py-1 rounded-md font-bold">1900 — 1960an</span>
+                        <h3 class="text-lg font-heading font-bold text-white mt-3 mb-2">Revolusi Massal & Pasca Perang</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Era di mana jalur produksi massal (seperti Ford Model T) membuat mobil bisa diakses publik. Di Jepang, industri mulai bangkit merancang mobil mungil efisien pasca Perang Dunia II.</p>
                     </div>
                 </div>
+
+                <!-- Era 3 -->
+                <div class="bg-brand-slatecard rounded-2xl border border-brand-border p-6 flex flex-col justify-between group hover:border-amber-500/60 transition">
+                    <div>
+                        <div class="h-40 rounded-xl overflow-hidden mb-5 border border-brand-border bg-black">
+                            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80" alt="Era JDM 90an" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <span class="text-[10px] font-mono bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-md font-bold">1970 — 2000an</span>
+                        <h3 class="text-lg font-heading font-bold text-white mt-3 mb-2">Zaman Keemasan JDM (Golden Era)</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Puncak kejayaan mesin legendaris seperti RB26DETT, 2JZ-GTE, dan rotari 13B. Lahirnya pertarungan sengit di jalur Touge pegunungan serta jalan tol Wangan Tokyo.</p>
+                    </div>
+                </div>
+
+                <!-- Era 4 -->
+                <div class="bg-brand-slatecard rounded-2xl border border-brand-border p-6 flex flex-col justify-between group hover:border-emerald-500/60 transition">
+                    <div>
+                        <div class="h-40 rounded-xl overflow-hidden mb-5 border border-brand-border bg-black">
+                            <img src="https://images.unsplash.com/photo-1594070319944-7c0c85c2901a?auto=format&fit=crop&w=600&q=80" alt="Era Modern" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                        </div>
+                        <span class="text-[10px] font-mono bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-md font-bold">2010an — Sekarang</span>
+                        <h3 class="text-lg font-heading font-bold text-white mt-3 mb-2">Era Modern & Custom Culture</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Transformasi teknologi sasis canggih, aerodinamika digital, serta ledakan tren global kultur modifikasi ekstrem wide-body dari maestro seperti LBWK dan RWB.</p>
+                    </div>
+                </div>
+
             </div>
-        </div>
-    </section>
+        </section>
+
+    </div>
 
     <!-- KONTEN KATALOG MOBIL (Awalnya Disembunyikan) -->
     <div id="appContainer" class="hidden flex-grow max-w-7xl mx-auto px-6 py-28 w-full">
@@ -241,19 +308,14 @@
         function getFotoMobil(nama) {
             const n = nama.toLowerCase();
 
-            // Nissan Skyline & GT-R Series
             if (n.includes('r32')) return './r32.jpg';
             if (n.includes('hakosuka') || n.includes('2000gt-r')) return './hakosuka.jpg';
             if (n.includes('r34') || n.includes('skyline') || n.includes('gt-r')) return './gtr.jpg';
-            
-            // Nissan Z & Silvia Series
             if (n.includes('240z') || n.includes('s30')) return './240z.jpg';
             if (n.includes('350z') || n.includes('z33')) return './350z.jpg';
             if (n.includes('180sx') || n.includes('rps13')) return './180sx.jpg';
             if (n.includes('s14')) return './s14.jpg';
             if (n.includes('silvia') || n.includes('s15')) return './silvia.jpg';
-
-            // Toyota Series
             if (n.includes('a70')) return './a70.jpg';
             if (n.includes('supra') || n.includes('a80')) return './supra.jpg';
             if (n.includes('chaser') || n.includes('jzx100')) return './chaser.jpg';
@@ -262,24 +324,16 @@
             if (n.includes('ae86') || n.includes('trueno')) return './ae86.jpg';
             if (n.includes('86') || n.includes('brz')) return './gt86.jpg';
             if (n.includes('crown')) return './crown.jpg';
-
-            // Honda Series
             if (n.includes('ek9') || n.includes('civic')) return './ek9.jpg';
             if (n.includes('dc2') || n.includes('integra')) return './dc2.jpg';
             if (n.includes('nsx')) return './nsx.jpg';
             if (n.includes('s2000')) return './s2000.jpg';
-
-            // Mazda Series
             if (n.includes('miata') || n.includes('mx-5') || n.includes('mx5')) return './miata.jpg';
             if (n.includes('az-1') || n.includes('az1') || n.includes('autozam')) return './az1.jpg';
             if (n.includes('rx-7') || n.includes('rx7') || n.includes('mazda')) return './rx7.jpg';
-
-            // Mitsubishi Series
             if (n.includes('3000gt') || n.includes('vr-4')) return './3000gt.jpg';
             if (n.includes('eclipse')) return './eclipse.jpg';
             if (n.includes('evo') || n.includes('lancer')) return './evo.jpg';
-
-            // Subaru, Lexus & European Legends
             if (n.includes('22b')) return './22b.jpg';
             if (n.includes('impreza') || n.includes('wrx')) return './impreza.jpg';
             if (n.includes('lfa') || n.includes('lexus')) return './lfa.jpg';
