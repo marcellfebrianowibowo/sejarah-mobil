@@ -1,161 +1,218 @@
 <!DOCTYPE html>
-<html lang="id" class="dark">
+<html class="dark scroll-smooth" lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Garasi Legenda - Ensiklopedia Mobil JDM</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>tailwind.config = { darkMode: 'class' }</script>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>GARASI LEGENDA | Ensiklopedia Otomotif &amp; Heritage JDM</title>
+    <!-- Tailwind CSS v3 with Plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts: Syne & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Syne:wght@700;800&amp;family=Noto+Sans+JP:wght@400;700&amp;display=swap" rel="stylesheet"/>
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+          darkMode: 'class',
+          theme: {
+            extend: {
+              colors: {
+                brand: {
+                  red: '#FF2A38',
+                  crimson: '#D90429',
+                  darkred: '#7D0A14',
+                  carbon: '#090B0E',
+                  slatecard: '#11151C',
+                  border: '#1E2530',
+                  accent: '#EF233C',
+                  blueprint: '#0A2540',
+                  cyanline: '#38BDF8'
+                }
+              },
+              fontFamily: {
+                heading: ['Syne', 'sans-serif'],
+                sans: ['Plus Jakarta Sans', 'sans-serif'],
+                jp: ['Noto Sans JP', 'sans-serif']
+              },
+              backgroundImage: {
+                'grid-pattern': "radial-gradient(rgba(255, 42, 56, 0.08) 1px, transparent 1px)",
+                'blueprint-grid': "linear-gradient(to right, rgba(56, 189, 248, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(56, 189, 248, 0.08) 1px, transparent 1px)"
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        .neon-border-hover:hover {
+          box-shadow: 0 0 25px -4px rgba(255, 42, 56, 0.45);
+          border-color: #FF2A38;
+        }
+        .neon-cyan-hover:hover {
+          box-shadow: 0 0 25px -4px rgba(56, 189, 248, 0.35);
+          border-color: #38BDF8;
+        }
+        .carbon-mesh {
+          background-color: #080A0E;
+          background-image: radial-gradient(#1c222c 0.75px, transparent 0.75px), radial-gradient(#1c222c 0.75px, #080A0E 0.75px);
+          background-size: 24px 24px;
+          background-position: 0 0, 12px 12px;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #090B0E; }
+        ::-webkit-scrollbar-thumb { background: #1E2530; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #FF2A38; }
+    </style>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-100 transition-colors duration-300 min-h-screen flex flex-col justify-between">
+<body class="bg-brand-carbon text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brand-red selection:text-white min-h-screen flex flex-col justify-between">
 
     <!-- Navbar -->
-    <nav class="bg-white dark:bg-gray-800 shadow-md p-4 flex justify-between items-center sticky top-0 z-50">
-        <h1 class="text-xl font-bold tracking-wider text-red-600 dark:text-red-500 cursor-pointer" onclick="tampilBeranda()">GARASI LEGENDA</h1>
-        <div class="flex items-center gap-6">
-            <a href="#" onclick="tampilBeranda()" class="hover:text-red-500 font-bold text-sm border-b-2 border-transparent hover:border-red-500 transition">Beranda</a>
-            <a href="#" onclick="tampilKatalogMobil()" class="hover:text-red-500 font-bold text-sm border-b-2 border-transparent hover:border-red-500 transition">Katalog Mobil</a>
-            <a href="#" onclick="tampilKatalogBodykit()" class="hover:text-red-500 font-bold text-sm border-b-2 border-transparent hover:border-red-500 transition">Sejarah Bodykit</a>
-            <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 rounded-lg bg-gray-200 dark:bg-gray-700 text-sm" title="Ganti Tema">🌓</button>
-        </div>
-    </nav>
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl bg-brand-carbon/80 border-b border-brand-border/60">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
+            <a class="flex items-center gap-3 group focus:outline-none cursor-pointer" onclick="tampilBeranda()">
+                <div class="relative w-10 h-10 rounded-lg bg-gradient-to-br from-brand-red to-brand-darkred flex items-center justify-center p-2 shadow-lg shadow-brand-red/30 group-hover:scale-105 transition-transform duration-200">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-brand-red rounded-full animate-ping"></span>
+                </div>
+                <div class="flex flex-col">
+                    <div class="flex items-baseline gap-2">
+                        <span class="font-heading font-extrabold text-xl tracking-wider text-white">GARASI</span>
+                        <span class="font-heading font-extrabold text-xl tracking-wider text-brand-red">LEGENDA</span>
+                    </div>
+                    <span class="font-jp text-[10px] tracking-widest text-gray-500 uppercase -mt-1 font-semibold">伝説のガレージ • JDM ARCHIVE</span>
+                </div>
+            </a>
+            
+            <nav class="hidden lg:flex items-center space-x-1">
+                <a onclick="tampilBeranda()" class="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition cursor-pointer">Beranda</a>
+                <a onclick="tampilKatalogMobil()" class="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition cursor-pointer">Katalog Mobil</a>
+                <a onclick="tampilKatalogBodykit()" class="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition cursor-pointer">Sejarah Bodykit</a>
+            </nav>
 
-    <!-- Tampilan Awal / Menu Utama (Menggunakan bg-utama.jpg) -->
-    <div id="homeContainer" class="flex-grow flex flex-col justify-center items-center px-6 py-12 text-center bg-cover bg-center bg-fixed" style="background-image: linear-gradient(rgba(17, 24, 39, 0.8), rgba(17, 24, 39, 0.95)), url('./bg-utama.jpg');">
-        <div class="max-w-3xl mb-10">
-            <span class="text-xs font-bold tracking-widest text-red-500 uppercase bg-red-900/40 border border-red-500/30 px-3 py-1 rounded-full shadow-lg">Ensiklopedia Otomotif JDM</span>
-            <h2 class="text-4xl md:text-5xl font-extrabold mt-5 mb-4 tracking-tight text-white drop-shadow-md">Pilih Kategori Eksplorasi</h2>
-            <p class="text-gray-300 text-base md:text-lg drop-shadow">Selamat datang di Garasi Legenda. Silakan pilih menu di bawah ini untuk memulai perjalanan sejarah otomotif Anda.</p>
+            <div class="flex items-center gap-3">
+                <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 rounded-lg bg-brand-slatecard border border-brand-border text-xs text-gray-400 hover:text-white" title="Ganti Tema">🌓</button>
+            </div>
         </div>
+    </header>
 
-        <!-- Kartu Pilihan Utama di Tengah -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl w-full">
-            <!-- Pilihan 1: Katalog Mobil -->
-            <div onclick="tampilKatalogMobil()" class="group relative bg-gray-800 rounded-2xl overflow-hidden shadow-2xl cursor-pointer transform hover:-translate-y-2 transition duration-300 border border-gray-600 hover:border-red-500 h-80 flex flex-col justify-end p-8 text-left bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80');">
-                <span class="text-xs font-semibold text-red-400 uppercase tracking-wider mb-1 drop-shadow">Database Cloud</span>
-                <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-red-400 transition drop-shadow-md">Katalog Mobil Legendaris</h3>
-                <p class="text-sm text-gray-300 mb-4 line-clamp-2 drop-shadow">Jelajahi sejarah mendalam, mesin, dan performa puluhan mobil sport ikonik dunia.</p>
-                <div class="flex items-center gap-2 text-sm font-bold text-red-500 group-hover:translate-x-2 transition">
-                    Buka Katalog Mobil &rarr;
+    <!-- TAMPILAN BERANDA (PILIH KATEGORI) DENGAN BACKGROUND FOTO bg-utama.jpg -->
+    <section id="homeContainer" class="flex-grow pt-32 pb-20 flex flex-col justify-center items-center px-6 bg-cover bg-center bg-fixed" style="background-image: linear-gradient(rgba(9, 11, 14, 0.85), rgba(9, 11, 14, 0.95)), url('./bg-utama.jpg');">
+        <div class="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center">
+            <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-brand-red/10 border border-brand-red/30 mb-6 backdrop-blur-md">
+                <span class="w-2 h-2 rounded-full bg-brand-red animate-pulse"></span>
+                <span class="text-xs uppercase tracking-widest font-bold text-brand-red">ENSIKLOPEDIA OTOMOTIF JDM • HERITAGE ARCHIVE</span>
+            </div>
+            
+            <h1 class="text-3xl sm:text-5xl font-heading font-black tracking-tight text-white uppercase max-w-4xl leading-tight">
+                Pilih Kategori Eksplorasi Arsip Legendaris
+            </h1>
+            
+            <p class="mt-4 text-sm sm:text-base text-gray-300 max-w-2xl">
+                Selamat datang di Garasi Legenda. Pilih jalur penelusuran Anda untuk menyingkap spesifikasi mobil sport atau evolusi seni aerodinamika sasis.
+            </p>
+
+            <!-- 2 Kartu Utama di Tengah -->
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl text-left">
+                <!-- Kartu Katalog Mobil -->
+                <div onclick="tampilKatalogMobil()" class="group relative rounded-3xl bg-brand-slatecard border border-brand-border/90 overflow-hidden transition-all duration-300 neon-border-hover cursor-pointer flex flex-col justify-between p-8 h-80 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(17,21,28,0.95), rgba(17,21,28,0.6)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80');">
+                    <div>
+                        <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-brand-red text-white rounded-md">DATABASE CLOUD</span>
+                        <h3 class="text-2xl font-heading font-black text-white group-hover:text-brand-red transition mt-3">Katalog Mobil Legendaris</h3>
+                        <p class="mt-2 text-xs text-gray-300 line-clamp-2">Jelajahi sejarah mendalam, blueprint mesin ikonik (RB26, 2JZ), dan performa puluhan mobil sport.</p>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm font-bold text-brand-red group-hover:translate-x-2 transition">
+                        Buka Katalog Mobil &rarr;
+                    </div>
+                </div>
+
+                <!-- Kartu Sejarah Bodykit (Menggunakan bodykit.jpg) -->
+                <div onclick="tampilKatalogBodykit()" class="group relative rounded-3xl bg-brand-blueprint/30 border border-cyan-900/50 overflow-hidden transition-all duration-300 neon-cyan-hover cursor-pointer flex flex-col justify-between p-8 h-80 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(10,37,64,0.95), rgba(10,37,64,0.6)), url('./bodykit.jpg');">
+                    <div>
+                        <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-sky-500/20 text-sky-400 border border-sky-400/30 rounded-md">CUSTOM CULTURE</span>
+                        <h3 class="text-2xl font-heading font-black text-white group-hover:text-sky-400 transition mt-3">Sejarah Bodykit & Tuner</h3>
+                        <p class="mt-2 text-xs text-gray-300 line-clamp-2">Mengenal mahakarya wide-body riveted, filosofi aerodinamika RWB, LBWK, hingga Top Secret.</p>
+                    </div>
+                    <div class="flex items-center gap-2 text-sm font-bold text-sky-400 group-hover:translate-x-2 transition">
+                        Jelajahi Sejarah Bodykit &rarr;
+                    </div>
                 </div>
             </div>
-
-            <!-- Pilihan 2: Sejarah Bodykit (Menggunakan bodykit.jpg) -->
-            <div onclick="tampilKatalogBodykit()" class="group relative bg-gray-800 rounded-2xl overflow-hidden shadow-2xl cursor-pointer transform hover:-translate-y-2 transition duration-300 border border-gray-600 hover:border-red-500 h-80 flex flex-col justify-end p-8 text-left bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2)), url('./bodykit.jpg');">
-                <span class="text-xs font-semibold text-gray-300 uppercase tracking-wider mb-1 drop-shadow">Custom Culture</span>
-                <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-red-400 transition drop-shadow-md">Sejarah Bodykit & Tuner</h3>
-                <p class="text-sm text-gray-300 mb-4 line-clamp-2 drop-shadow">Mengenal mahakarya wide-body dan filosofi rumah modifikasi dunia seperti LBWK dan RWB.</p>
-                <div class="flex items-center gap-2 text-sm font-bold text-red-500 group-hover:translate-x-2 transition">
-                    Jelajahi Sejarah Bodykit &rarr;
-                </div>
-            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Konten Utama (Mobil) - Awalnya Disembunyikan -->
-    <div id="appContainer" class="hidden flex-grow">
-        <header class="bg-cover bg-center py-16 px-6 text-center bg-gray-800 text-white" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80');">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-3">Jejak Sejarah Mobil Legendaris Dunia</h2>
-            <p class="max-w-xl mx-auto text-gray-300 text-sm">Eksplorasi evolusi, performa, dan latar belakang sejarah kendaraan ikonik berbasis Cloud Database.</p>
-        </header>
-
-        <main class="max-w-6xl mx-auto px-6 py-12 w-full">
-            <button onclick="tampilBeranda()" class="mb-8 bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2 shadow-sm border border-gray-300 dark:border-gray-700">
-                &larr; Kembali ke Beranda
-            </button>
-
-            <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
-                <h3 class="text-2xl font-bold">Katalog Mobil</h3>
-                <input type="text" id="searchInput" placeholder="Cari mobil atau pabrikan..." class="px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 w-full md:w-72 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
-            </div>
-            <!-- Grid Kartu Mobil -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="mobilContainer">
-                <div class="col-span-3 text-center py-10 text-gray-500">Memuat data dari database Supabase...</div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Konten Bodykit - Awalnya Disembunyikan -->
-    <div id="bodykitContainer" class="hidden flex-grow">
-        <header class="bg-cover bg-center py-16 px-6 text-center bg-gray-800 text-white" style="background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1594070319944-7c0c85c2901a?auto=format&fit=crop&w=1200&q=80');">
-            <h2 class="text-3xl md:text-4xl font-extrabold mb-3">Galeri Modifikasi & Bodykit</h2>
-            <p class="max-w-xl mx-auto text-gray-300 text-sm">Mengenal lebih dekat para seniman otomotif dan mahakarya wide-body dunia.</p>
-        </header>
-
-        <main class="max-w-6xl mx-auto px-6 py-12 w-full">
-            <button onclick="tampilBeranda()" class="mb-8 bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2 shadow-sm border border-gray-300 dark:border-gray-700">
-                &larr; Kembali ke Beranda
-            </button>
-
-            <h3 class="text-2xl font-bold mb-8">Katalog Bodykit Legend</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="katalogBodykitGrid">
-                <!-- Akan dirender lewat JavaScript -->
-            </div>
-        </main>
-    </div>
-
-    <!-- Halaman Detail Umum -->
-    <div id="detailContainer" class="hidden max-w-4xl mx-auto px-6 py-12 w-full flex-grow">
-        <button onclick="kembaliKeKatalog()" class="mb-6 bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 px-4 py-2 rounded-xl text-sm font-semibold transition flex items-center gap-2 shadow-sm border border-gray-300 dark:border-gray-700">
-            &larr; Kembali ke Katalog
+    <!-- KONTEN KATALOG MOBIL (Awalnya Disembunyikan) -->
+    <div id="appContainer" class="hidden flex-grow max-w-7xl mx-auto px-6 py-28 w-full">
+        <button onclick="tampilBeranda()" class="mb-6 px-4 py-2 rounded-xl text-xs font-bold bg-brand-slatecard hover:bg-brand-border text-gray-300 border border-brand-border transition flex items-center gap-2 w-max">
+            &larr; Kembali ke Beranda
         </button>
-        <div id="detailContent" class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700 p-6 md:p-8">
-            <!-- Konten detail akan dirender di sini -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+            <div>
+                <h3 class="text-3xl font-heading font-black text-white">Katalog Mobil Legendaris</h3>
+                <p class="text-sm text-gray-400 mt-1">Data live dari Supabase Database</p>
+            </div>
+            <input type="text" id="searchInput" placeholder="Cari mobil atau pabrikan..." class="px-4 py-2.5 rounded-xl border border-brand-border bg-brand-slatecard w-full md:w-80 focus:outline-none focus:border-brand-red text-sm text-white">
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="mobilContainer">
+            <div class="col-span-3 text-center py-12 text-gray-500 font-mono">Memuat data dari database Supabase...</div>
+        </div>
+    </div>
+
+    <!-- KONTEN SEJARAH BODYKIT (Awalnya Disembunyikan) -->
+    <div id="bodykitContainer" class="hidden flex-grow max-w-7xl mx-auto px-6 py-28 w-full">
+        <button onclick="tampilBeranda()" class="mb-6 px-4 py-2 rounded-xl text-xs font-bold bg-brand-slatecard hover:bg-brand-border text-gray-300 border border-brand-border transition flex items-center gap-2 w-max">
+            &larr; Kembali ke Beranda
+        </button>
+        <h3 class="text-3xl font-heading font-black text-white mb-2">Katalog Bodykit Legend</h3>
+        <p class="text-sm text-gray-400 mb-8">Filosofi dan mahakarya master modifikasi dunia.</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="katalogBodykitGrid">
+            <!-- Render Bodykit lewat JS -->
+        </div>
+    </div>
+
+    <!-- HALAMAN DETAIL (Awalnya Disembunyikan) -->
+    <div id="detailContainer" class="hidden max-w-4xl mx-auto px-6 py-28 w-full flex-grow">
+        <button onclick="kembaliKeKatalog()" class="mb-6 px-4 py-2 rounded-xl text-xs font-bold bg-brand-slatecard hover:bg-brand-border text-gray-300 border border-brand-border transition flex items-center gap-2 w-max">
+            &larr; Kembali
+        </button>
+        <div id="detailContent" class="bg-brand-slatecard rounded-3xl border border-brand-border p-8 md:p-10 shadow-2xl">
+            <!-- Detail Konten -->
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white text-center py-6 text-xs mt-12 w-full">
-        <p>&copy; 2026 Garasi Legenda. Supabase + GitHub Pages.</p>
+    <footer class="border-t border-brand-border bg-brand-carbon pt-12 pb-8 w-full">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 font-mono gap-4">
+            <div>© 2026 Garasi Legenda. Supabase + GitHub Pages.</div>
+            <div class="text-brand-red font-semibold">伝説は色褪せない (Legenda Takkan Pernah Pudar)</div>
+        </div>
     </footer>
 
-    <!-- Skrip Aplikasi -->
+    <!-- SKRIP APLIKASI & DATABASE SUPABASE -->
     <script>
         const SUPABASE_URL = 'https://ligbjputqpzubhbxmdia.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_-CWQKbOMRIot2AKjeZp8LA_P9ZsQeAf';
         let semuaDataMobil = [];
-        let menuAktif = 'home'; 
+        let menuAktif = 'home';
 
-        // --- DATA STATIS BODYKIT (LBWK & RWB) ---
         const dataBodykit = [
             {
                 id: 1,
                 nama_bodykit: "Liberty Walk (LBWK)",
                 asal: "Nagoya, Jepang",
                 pendiri: "Wataru Kato",
-                sejarah: `Liberty Walk (LBWK) didirikan pada tahun 1993 oleh seorang visioner bernama Wataru Kato (yang akrab disapa Kato-san) di Nagoya, Jepang. Pada awalnya, Liberty Walk hanyalah sebuah bengkel kecil yang berfokus pada penjualan mobil bekas dan mengimpor mobil-mobil eksotis dari Amerika Serikat ke Jepang. Namun, Kato-san memiliki hasrat yang terpendam untuk mengubah industri mobil modifikasi yang menurutnya mulai terasa membosankan dan terlalu kaku.
-
-Gaya modifikasi LBWK sangat kental terinspirasi dari budaya balap jalanan klasik Jepang era 70-an dan 80-an, khususnya gaya "Kaido Racer" dan kultur "Bosozoku" atau Works Style. Ciri khas paling brutal dan ikonik dari Liberty Walk adalah keberanian mereka memotong fender asli pabrikan, lalu memaku overfender super lebar langsung ke bodi mobil. Baut-baut atau paku keling (rivets) sengaja diekspos (dibiarkan terlihat) untuk memberikan kesan agresif, mentah, dan layaknya mobil balap siluet retro, dipadukan dengan postur mobil yang dirapatkan ke aspal menggunakan sistem suspensi udara (air suspension).
-
-Gebrakan terbesar yang membuat nama Liberty Walk meledak di kancah global terjadi ketika Kato-san mendobrak "tabu" dan aturan suci dunia otomotif: ia dengan santai memotong bodi mulus supercar Eropa seharga miliaran rupiah seperti Lamborghini Murcielago, Lamborghini Aventador, dan Ferrari 458. Tindakan ekstrem ini sempat memicu kemarahan para purist (kaum pecinta mobil orisinal), namun di sisi lain, justru keberanian inilah yang membuat LBWK dipuja sebagai dewa oleh para penggemar custom culture di seluruh dunia.`,
-                foto_cover: "./lbwk-logo.jpg",
-                galeri: [
-                    "./lbwk1.jpg",
-                    "./lbwk2.jpg",
-                    "./lbwk3.jpg",
-                    "./lbwk4.jpg"
-                ]
+                sejarah: "Liberty Walk (LBWK) didirikan pada tahun 1993 oleh Wataru Kato di Nagoya, Jepang. Gaya modifikasinya kental dengan kultur 'Kaido Racer' era 70-an dan overfender baut terbuka yang sangat ikonik pada mobil supercar dan JDM modern.",
+                foto_cover: "./bodykit.jpg",
+                galeri: ["./lbwk1.jpg", "./lbwk2.jpg"]
             },
             {
                 id: 2,
                 nama_bodykit: "RAUH-Welt Begriff (RWB)",
                 asal: "Chiba, Jepang",
                 pendiri: "Akira Nakai",
-                sejarah: `RAUH-Welt Begriff (RWB) yang berarti "Konsep Dunia Kasar" dalam bahasa Jerman, adalah sebuah mahakarya tuning khusus Porsche yang didirikan oleh seniman otomotif eksentrik asal Jepang, Akira Nakai. Berbasis di sebuah bengkel kecil yang sederhana dan penuh dengan tumpukan onderdil di Chiba, Jepang, Nakai-san memulai perjalanannya bukan dengan Porsche, melainkan di kancah balap jalanan dan drifting. Pada awal 1990-an, ia adalah anggota terkemuka dari kru drift legendaris bernama 'Rough World' yang sering memacu Toyota Corolla AE86 (Hachiroku) menembus batas di jalanan pegunungan Jepang.
-
-Kecintaannya pada otomotif mengalami titik balik besar ketika ia bekerja di sebuah bengkel bodi dan mendapatkan kesempatan merestorasi sebuah Porsche 930 klasik yang rusak. Terpesona oleh desain dan siluet Porsche, Nakai-san akhirnya membeli Porsche 930 pertamanya di akhir 90-an. Ia memodifikasi mobil tersebut dengan gaya agresif khas mobil balap yang biasa ia terapkan pada AE86-nya, membalutnya dengan warna hitam matte, dan memberinya nama "Stella Artois" (diambil dari merek bir favoritnya). Mobil inilah yang menjadi cetak biru lahirnya gaya RWB yang kita kenal sekarang.
-
-Ciri khas absolut dari setiap kreasi RWB adalah fender super lebar (wide-body) beraliran ekstrem yang dibaut secara kasar ke bodi asli, sayap belakang berukuran raksasa tipe 'ducktail' atau GT-wing yang menjulang tinggi, velg custom ber-offset super dalam (deep dish), serta fitment suspensi yang ceper nyaris menyentuh aspal. Desain ini menggabungkan keanggunan garis bodi mobil sport Eropa klasik dengan kebrutalan kultur balap jalanan Jepang.
-
-Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekadar bentuk fisiknya, melainkan proses spiritual pembuatannya. Nakai-san menolak produksi massal. Ia secara eksklusif terbang sendirian ke seluruh penjuru dunia (Amerika, Eropa, Asia) untuk membangun setiap mobil kliennya secara langsung dengan tangannya sendiri. Ia tidak pernah menggunakan alat ukur digital, laser, atau komputer 3D. Semua proses pemotongan fender asli Porsche yang harganya selangit itu dilakukan hanya dengan mengandalkan insting tajamnya, sepotong lakban kertas sebagai penanda, dan mata telanjangnya.`,
+                sejarah: "RWB memadukan estetika mobil balap klasik Eropa dengan sentuhan jalanan Jepang. Akira Nakai membangun setiap mobil klien secara langsung di seluruh dunia menggunakan insting murni tanpa alat ukur digital.",
                 foto_cover: "./rwb-logo.jpg",
-                galeri: [
-                    "./rwb1.jpg", 
-                    "./rwb2.jpg",
-                    "./rwb3.jpg",
-                    "./rwb4.jpg"
-                ] 
+                galeri: ["./rwb1.jpg", "./rwb2.jpg"]
             }
         ];
 
@@ -165,7 +222,7 @@ Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekad
                 const response = await fetch(`${SUPABASE_URL}/rest/v1/mobil?select=*&order=tahun.asc`, {
                     headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
                 });
-                if (!response.ok) throw new Error(`Gagal mengambil data`);
+                if (!response.ok) throw new Error('Gagal mengambil data dari Supabase');
                 semuaDataMobil = await response.json();
                 renderKatalogMobil(semuaDataMobil);
 
@@ -175,49 +232,36 @@ Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekad
                     renderKatalogMobil(filtered);
                 });
             } catch (error) {
-                container.innerHTML = `<p class="text-red-500 col-span-3 text-center">Gagal memuat database: ${error.message}</p>`;
+                container.innerHTML = `<p class="text-brand-red col-span-3 text-center font-mono">Gagal memuat database: ${error.message}</p>`;
             }
         }
 
-        // --- FUNGSI PEMANGGILAN FOTO LOKAL LENGKAP ---
         function getFotoMobil(nama) {
             const n = nama.toLowerCase();
-
             if (n.includes('r32')) return './r32.jpg';
-            if (n.includes('hakosuka') || n.includes('2000gt-r')) return './hakosuka.jpg';
-            if (n.includes('r34') || n.includes('skyline') || n.includes('gt-r')) return './gtr.jpg';
-            if (n.includes('240z') || n.includes('s30')) return './240z.jpg';
-            if (n.includes('350z') || n.includes('z33')) return './350z.jpg';
-            if (n.includes('180sx') || n.includes('rps13')) return './180sx.jpg';
-            if (n.includes('s14')) return './s14.jpg';
-            if (n.includes('silvia') || n.includes('s15')) return './silvia.jpg';
-            if (n.includes('a70')) return './a70.jpg';
-            if (n.includes('supra') || n.includes('a80')) return './supra.jpg';
-            if (n.includes('chaser') || n.includes('jzx100')) return './chaser.jpg';
-            if (n.includes('mr2') || n.includes('sw20')) return './mr2.jpg';
-            if (n.includes('celica') || n.includes('st205')) return './celica.jpg';
-            if (n.includes('ae86') || n.includes('trueno')) return './ae86.jpg';
+            if (n.includes('hakosuka')) return './hakosuka.jpg';
+            if (n.includes('240z')) return './240z.jpg';
+            if (n.includes('350z')) return './350z.jpg';
+            if (n.includes('180sx')) return './180sx.jpg';
+            if (n.includes('supra')) return './supra.jpg';
+            if (n.includes('chaser')) return './chaser.jpg';
+            if (n.includes('mr2')) return './mr2.jpg';
+            if (n.includes('celica')) return './celica.jpg';
             if (n.includes('86') || n.includes('brz')) return './gt86.jpg';
-            if (n.includes('crown')) return './crown.jpg';
+            if (n.includes('miata')) return './miata.jpg';
             if (n.includes('ek9') || n.includes('civic')) return './ek9.jpg';
             if (n.includes('dc2') || n.includes('integra')) return './dc2.jpg';
-            if (n.includes('nsx')) return './nsx.jpg';
-            if (n.includes('s2000')) return './s2000.jpg';
-            if (n.includes('miata') || n.includes('mx-5') || n.includes('mx5')) return './miata.jpg';
-            if (n.includes('az-1') || n.includes('az1') || n.includes('autozam')) return './az1.jpg';
-            if (n.includes('rx-7') || n.includes('rx7') || n.includes('mazda')) return './rx7.jpg';
-            if (n.includes('3000gt') || n.includes('vr-4')) return './3000gt.jpg';
+            if (n.includes('3000gt')) return './3000gt.jpg';
             if (n.includes('eclipse')) return './eclipse.jpg';
-            if (n.includes('evo') || n.includes('lancer')) return './evo.jpg';
             if (n.includes('22b')) return './22b.jpg';
-            if (n.includes('impreza') || n.includes('wrx')) return './impreza.jpg';
-            if (n.includes('lfa') || n.includes('lexus')) return './lfa.jpg';
-            if (n.includes('porsche') || n.includes('911')) return './porsche.jpg';
-
+            if (n.includes('lfa')) return './lfa.jpg';
+            if (n.includes('s14')) return './s14.jpg';
+            if (n.includes('a70')) return './a70.jpg';
+            if (n.includes('crown')) return './crown.jpg';
+            if (n.includes('az-1')) return './az1.jpg';
             return 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
         }
 
-        // --- FUNGSI TAMPILAN MENU & NAVIGASI ---
         function tampilBeranda() {
             menuAktif = 'home';
             document.getElementById('homeContainer').classList.remove('hidden');
@@ -242,33 +286,31 @@ Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekad
             document.getElementById('appContainer').classList.add('hidden');
             document.getElementById('detailContainer').classList.add('hidden');
             document.getElementById('bodykitContainer').classList.remove('hidden');
-            
             renderKatalogBodykit();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function kembaliKeKatalog() {
-            if(menuAktif === 'mobil') tampilKatalogMobil();
-            else if(menuAktif === 'bodykit') tampilKatalogBodykit();
+            if (menuAktif === 'mobil') tampilKatalogMobil();
+            else if (menuAktif === 'bodykit') tampilKatalogBodykit();
             else tampilBeranda();
         }
 
-        // --- FUNGSI RENDER KATALOG ---
         function renderKatalogMobil(data) {
             const container = document.getElementById('mobilContainer');
             container.innerHTML = '';
             data.forEach(mobil => {
                 const fotoUrl = getFotoMobil(mobil.nama_mobil);
                 container.innerHTML += `
-                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
-                        <img src="${fotoUrl}" alt="${mobil.nama_mobil}" class="h-48 w-full object-cover">
-                        <div class="p-5 flex flex-col flex-grow justify-between">
+                    <div class="bg-brand-slatecard rounded-2xl border border-brand-border overflow-hidden flex flex-col justify-between group hover:border-brand-red/60 transition">
+                        <img src="${fotoUrl}" alt="${mobil.nama_mobil}" class="h-48 w-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="p-6 flex flex-col flex-grow justify-between">
                             <div>
-                                <span class="text-xs bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 px-2.5 py-1 rounded-full font-semibold">${mobil.pabrikan} (${mobil.tahun})</span>
-                                <h4 class="text-xl font-bold mt-3 mb-2">${mobil.nama_mobil}</h4>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">${mobil.sejarah}</p>
+                                <span class="text-[10px] font-mono bg-brand-red/10 text-brand-red px-2.5 py-1 rounded-md font-bold">${mobil.pabrikan} • ${mobil.tahun}</span>
+                                <h4 class="text-xl font-heading font-extrabold text-white mt-3 mb-2">${mobil.nama_mobil}</h4>
+                                <p class="text-xs text-gray-400 line-clamp-3 leading-relaxed">${mobil.sejarah}</p>
                             </div>
-                            <button onclick="bukaDetailMobil(${mobil.id})" class="w-full text-center bg-red-600 hover:bg-red-700 text-white font-semibold text-sm py-2.5 rounded-lg transition mt-4">Baca Sejarah &rarr;</button>
+                            <button onclick="bukaDetailMobil(${mobil.id})" class="mt-6 w-full py-2.5 rounded-xl bg-brand-carbon hover:bg-brand-red text-white text-xs font-bold transition border border-brand-border hover:border-brand-red">Baca Sejarah &rarr;</button>
                         </div>
                     </div>
                 `;
@@ -280,22 +322,21 @@ Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekad
             container.innerHTML = '';
             dataBodykit.forEach(kit => {
                 container.innerHTML += `
-                    <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col justify-between">
-                        <img src="${kit.foto_cover}" alt="${kit.nama_bodykit}" class="h-48 w-full object-contain bg-white grayscale hover:grayscale-0 transition duration-500 p-4">
-                        <div class="p-5 flex flex-col flex-grow justify-between">
+                    <div class="bg-brand-slatecard rounded-2xl border border-brand-border overflow-hidden flex flex-col justify-between group hover:border-sky-500/60 transition">
+                        <img src="${kit.foto_cover}" alt="${kit.nama_bodykit}" class="h-56 w-full object-cover group-hover:scale-105 transition duration-500">
+                        <div class="p-6 flex flex-col flex-grow justify-between">
                             <div>
-                                <span class="text-xs bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-2.5 py-1 rounded-full font-semibold">Tuner: ${kit.pendiri}</span>
-                                <h4 class="text-xl font-bold mt-3 mb-2">${kit.nama_bodykit}</h4>
-                                <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">${kit.sejarah}</p>
+                                <span class="text-[10px] font-mono bg-sky-500/10 text-sky-400 px-2.5 py-1 rounded-md font-bold">Tuner: ${kit.pendiri}</span>
+                                <h4 class="text-xl font-heading font-extrabold text-white mt-3 mb-2">${kit.nama_bodykit}</h4>
+                                <p class="text-xs text-gray-400 line-clamp-3 leading-relaxed">${kit.sejarah}</p>
                             </div>
-                            <button onclick="bukaDetailBodykit(${kit.id})" class="w-full text-center bg-gray-800 hover:bg-black dark:hover:bg-gray-600 text-white font-semibold text-sm py-2.5 rounded-lg transition mt-4">Jelajahi Karya &rarr;</button>
+                            <button onclick="bukaDetailBodykit(${kit.id})" class="mt-6 w-full py-2.5 rounded-xl bg-brand-carbon hover:bg-sky-600 text-white text-xs font-bold transition border border-brand-border hover:border-sky-500">Jelajahi Karya &rarr;</button>
                         </div>
                     </div>
                 `;
             });
         }
 
-        // --- FUNGSI BUKA DETAIL ---
         function bukaDetailMobil(id) {
             const mobil = semuaDataMobil.find(m => m.id === id);
             if (!mobil) return;
@@ -305,11 +346,11 @@ Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekad
             document.getElementById('detailContainer').classList.remove('hidden');
 
             document.getElementById('detailContent').innerHTML = `
-                <span class="text-xs bg-red-100 dark:bg-red-900/40 text-red-600 dark:text-red-400 px-3 py-1 rounded-full font-semibold">${mobil.pabrikan} • Tahun ${mobil.tahun}</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold mt-3 mb-6">${mobil.nama_mobil}</h2>
-                <div class="rounded-xl overflow-hidden shadow-lg mb-6"><img src="${fotoUrl}" class="w-full h-72 md:h-96 object-cover"></div>
-                <h3 class="text-xl font-bold mb-3 text-red-600 dark:text-red-400">Latar Belakang & Sejarah</h3>
-                <p class="text-base text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${mobil.sejarah}</p>
+                <span class="text-xs font-mono bg-brand-red/10 text-brand-red px-3 py-1 rounded-md font-bold">${mobil.pabrikan} • Tahun ${mobil.tahun}</span>
+                <h2 class="text-3xl font-heading font-black text-white mt-3 mb-6">${mobil.nama_mobil}</h2>
+                <div class="rounded-2xl overflow-hidden mb-6 border border-brand-border"><img src="${fotoUrl}" class="w-full h-80 object-cover"></div>
+                <h3 class="text-lg font-heading font-bold text-white mb-3">Latar Belakang & Sejarah</h3>
+                <p class="text-sm text-gray-300 leading-relaxed whitespace-pre-line">${mobil.sejarah}</p>
             `;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -321,28 +362,17 @@ Namun, yang membuat RWB berstatus "dewa" di kancah otomotif dunia bukanlah sekad
             document.getElementById('bodykitContainer').classList.add('hidden');
             document.getElementById('detailContainer').classList.remove('hidden');
 
-            let galeriHTML = '';
-            if (kit.galeri && kit.galeri.length > 0) {
-                galeriHTML = `
-                    <h3 class="text-xl font-bold mt-10 mb-4 text-gray-800 dark:text-gray-200 border-t border-gray-200 dark:border-gray-700 pt-6">Galeri Karya ${kit.nama_bodykit}</h3>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        ${kit.galeri.map(foto => `<img src="${foto}" alt="Karya Bodykit" class="w-full h-56 md:h-64 object-cover rounded-xl shadow-md hover:scale-105 transition-transform duration-300 cursor-pointer">`).join('')}
-                    </div>
-                `;
-            }
-
             document.getElementById('detailContent').innerHTML = `
-                <span class="text-xs bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-300 px-3 py-1 rounded-full font-semibold">Asal: ${kit.asal} • Pendiri: ${kit.pendiri}</span>
-                <h2 class="text-3xl md:text-4xl font-extrabold mt-3 mb-6">${kit.nama_bodykit}</h2>
-                <div class="rounded-xl overflow-hidden shadow-lg mb-6"><img src="${kit.foto_cover}" class="w-full h-72 md:h-96 object-contain bg-white p-4"></div>
-                <h3 class="text-xl font-bold mb-3 text-gray-800 dark:text-gray-200">Sejarah & Filosofi Desain</h3>
-                <p class="text-base text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">${kit.sejarah}</p>
-                ${galeriHTML}
+                <span class="text-xs font-mono bg-sky-500/10 text-sky-400 px-3 py-1 rounded-md font-bold">Asal: ${kit.asal} • Pendiri: ${kit.pendiri}</span>
+                <h2 class="text-3xl font-heading font-black text-white mt-3 mb-6">${kit.nama_bodykit}</h2>
+                <div class="rounded-2xl overflow-hidden mb-6 border border-brand-border"><img src="${kit.foto_cover}" class="w-full h-80 object-cover"></div>
+                <h3 class="text-lg font-heading font-bold text-white mb-3">Sejarah & Filosofi Desain</h3>
+                <p class="text-sm text-gray-300 leading-relaxed whitespace-pre-line">${kit.sejarah}</p>
             `;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Jalankan aplikasi saat halaman dimuat
+        // Jalankan fetch data database
         ambilDataMobil();
     </script>
 </body>
