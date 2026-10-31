@@ -164,7 +164,7 @@
             &larr; Kembali ke Beranda
         </button>
         <h3 class="text-3xl font-heading font-black text-white mb-2">Katalog Bodykit Legend</h3>
-        <p class="text-sm text-gray-400 mb-8">Filosofi dan mahakarya master modifikasi dunia.</p>
+        <p class="text-sm text-gray-400 mb-8">Filosofi dan mahakarya master modifikasi dunia dengan narasi lengkap.</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="katalogBodykitGrid">
             <!-- Render Bodykit lewat JS -->
         </div>
@@ -195,24 +195,25 @@
         let semuaDataMobil = [];
         let menuAktif = 'home';
 
+        // DATA BODYKIT DENGAN PENJELASAN LENGKAP & PANJANG
         const dataBodykit = [
             {
                 id: 1,
                 nama_bodykit: "Liberty Walk (LBWK)",
                 asal: "Nagoya, Jepang",
                 pendiri: "Wataru Kato",
-                sejarah: "Liberty Walk (LBWK) didirikan pada tahun 1993 oleh Wataru Kato di Nagoya, Jepang. Gaya modifikasinya kental dengan kultur 'Kaido Racer' era 70-an dan overfender baut terbuka yang sangat ikonik pada mobil supercar dan JDM modern.",
+                sejarah: "Liberty Walk (LBWK) didirikan pada tahun 1993 oleh seorang visioner bernama Wataru Kato di Nagoya, Jepang. Pada awalnya, Liberty Walk hanyalah sebuah bengkel kecil yang berfokus pada penjualan mobil bekas dan mengimpor mobil-mobil eksotis dari Amerika Serikat. Namun, Kato-san memiliki hasrat untuk mendobrak industri modifikasi yang kaku.\n\nGaya modifikasi LBWK sangat kental terinspirasi dari kultur balap jalanan klasik Jepang era 70-an dan 80-an, khususnya gaya Kaido Racer dan Bosozoku. Ciri khas paling brutal dari Liberty Walk adalah keberanian mereka memotong fender asli pabrikan, lalu memaku overfender super lebar langsung ke bodi menggunakan baut rivet yang diekspos mentah.\n\nGebrakan terbesar mereka adalah ketika Kato-san nekat memotong bodi mulus supercar berharga miliaran rupiah seperti Lamborghini dan Ferrari. Meskipun sempat memicu kemarahan kaum purist, tindakan ekstrem ini justru membuat LBWK dicintai dan dipuja sebagai ikon global custom culture dunia.",
                 foto_cover: "./bodykit.jpg",
-                galeri: ["./lbwk1.jpg", "./lbwk2.jpg"]
+                galeri: ["./lbwk1.jpg", "./lbwk2.jpg", "./lbwk3.jpg", "./lbwk4.jpg"]
             },
             {
                 id: 2,
                 nama_bodykit: "RAUH-Welt Begriff (RWB)",
                 asal: "Chiba, Jepang",
                 pendiri: "Akira Nakai",
-                sejarah: "RWB memadukan estetika mobil balap klasik Eropa dengan sentuhan jalanan Jepang. Akira Nakai membangun setiap mobil klien secara langsung di seluruh dunia menggunakan insting murni tanpa alat ukur digital.",
+                sejarah: "RAUH-Welt Begriff (RWB) yang berarti 'Konsep Dunia Kasar' dalam bahasa Jerman, adalah mahakarya tuning khusus Porsche yang didirikan oleh seniman otomotif eksentrik asal Jepang, Akira Nakai. Berawal dari kru drift legendaris Rough World di era 90-an, Nakai-san menemukan jalan hidupnya setelah merestorasi sebuah Porsche 930 klasik yang diberi nama 'Stella Artois'.\n\nCiri khas absolut dari RWB adalah fender super lebar beraliran ekstrem, sayap belakang ducktail atau GT-wing raksasa, velg deep dish ber-offset dalam, serta fitment ceper yang menyentuh aspal. Desain ini memadukan keanggunan sport klasik Eropa dengan kebrutalan balap jalanan Jepang.\n\nYang membuat RWB berstatus legendaris adalah proses spiritualnya. Nakai-san menolak produksi massal dan terbang sendirian ke seluruh dunia untuk merakit setiap mobil dengan tangannya sendiri, tanpa alat ukur digital, hanya mengandalkan insting tajam dan mata telanjangnya.",
                 foto_cover: "./rwb-logo.jpg",
-                galeri: ["./rwb1.jpg", "./rwb2.jpg"]
+                galeri: ["./rwb1.jpg", "./rwb2.jpg", "./rwb3.jpg", "./rwb4.jpg"]
             }
         ];
 
@@ -236,29 +237,54 @@
             }
         }
 
+        // PEMETAAN FOTO LOKAL LENGKAP UNTUK SEMUA MOBIL
         function getFotoMobil(nama) {
             const n = nama.toLowerCase();
+
+            // Nissan Skyline & GT-R Series
             if (n.includes('r32')) return './r32.jpg';
-            if (n.includes('hakosuka')) return './hakosuka.jpg';
-            if (n.includes('240z')) return './240z.jpg';
-            if (n.includes('350z')) return './350z.jpg';
-            if (n.includes('180sx')) return './180sx.jpg';
-            if (n.includes('supra')) return './supra.jpg';
-            if (n.includes('chaser')) return './chaser.jpg';
-            if (n.includes('mr2')) return './mr2.jpg';
-            if (n.includes('celica')) return './celica.jpg';
+            if (n.includes('hakosuka') || n.includes('2000gt-r')) return './hakosuka.jpg';
+            if (n.includes('r34') || n.includes('skyline') || n.includes('gt-r')) return './gtr.jpg';
+            
+            // Nissan Z & Silvia Series
+            if (n.includes('240z') || n.includes('s30')) return './240z.jpg';
+            if (n.includes('350z') || n.includes('z33')) return './350z.jpg';
+            if (n.includes('180sx') || n.includes('rps13')) return './180sx.jpg';
+            if (n.includes('s14')) return './s14.jpg';
+            if (n.includes('silvia') || n.includes('s15')) return './silvia.jpg';
+
+            // Toyota Series
+            if (n.includes('a70')) return './a70.jpg';
+            if (n.includes('supra') || n.includes('a80')) return './supra.jpg';
+            if (n.includes('chaser') || n.includes('jzx100')) return './chaser.jpg';
+            if (n.includes('mr2') || n.includes('sw20')) return './mr2.jpg';
+            if (n.includes('celica') || n.includes('st205')) return './celica.jpg';
+            if (n.includes('ae86') || n.includes('trueno')) return './ae86.jpg';
             if (n.includes('86') || n.includes('brz')) return './gt86.jpg';
-            if (n.includes('miata')) return './miata.jpg';
+            if (n.includes('crown')) return './crown.jpg';
+
+            // Honda Series
             if (n.includes('ek9') || n.includes('civic')) return './ek9.jpg';
             if (n.includes('dc2') || n.includes('integra')) return './dc2.jpg';
-            if (n.includes('3000gt')) return './3000gt.jpg';
+            if (n.includes('nsx')) return './nsx.jpg';
+            if (n.includes('s2000')) return './s2000.jpg';
+
+            // Mazda Series
+            if (n.includes('miata') || n.includes('mx-5') || n.includes('mx5')) return './miata.jpg';
+            if (n.includes('az-1') || n.includes('az1') || n.includes('autozam')) return './az1.jpg';
+            if (n.includes('rx-7') || n.includes('rx7') || n.includes('mazda')) return './rx7.jpg';
+
+            // Mitsubishi Series
+            if (n.includes('3000gt') || n.includes('vr-4')) return './3000gt.jpg';
             if (n.includes('eclipse')) return './eclipse.jpg';
+            if (n.includes('evo') || n.includes('lancer')) return './evo.jpg';
+
+            // Subaru, Lexus & European Legends
             if (n.includes('22b')) return './22b.jpg';
-            if (n.includes('lfa')) return './lfa.jpg';
-            if (n.includes('s14')) return './s14.jpg';
-            if (n.includes('a70')) return './a70.jpg';
-            if (n.includes('crown')) return './crown.jpg';
-            if (n.includes('az-1')) return './az1.jpg';
+            if (n.includes('impreza') || n.includes('wrx')) return './impreza.jpg';
+            if (n.includes('lfa') || n.includes('lexus')) return './lfa.jpg';
+            if (n.includes('porsche') || n.includes('911')) return './porsche.jpg';
+
             return 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
         }
 
@@ -362,12 +388,23 @@
             document.getElementById('bodykitContainer').classList.add('hidden');
             document.getElementById('detailContainer').classList.remove('hidden');
 
+            let galeriHTML = '';
+            if (kit.galeri && kit.galeri.length > 0) {
+                galeriHTML = `
+                    <h3 class="text-lg font-heading font-bold text-white mt-10 mb-4 border-t border-brand-border pt-6">Galeri Karya ${kit.nama_bodykit}</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        ${kit.galeri.map(foto => `<img src="${foto}" alt="Galeri Bodykit" class="w-full h-56 object-cover rounded-xl border border-brand-border hover:scale-105 transition duration-300">`).join('')}
+                    </div>
+                `;
+            }
+
             document.getElementById('detailContent').innerHTML = `
                 <span class="text-xs font-mono bg-sky-500/10 text-sky-400 px-3 py-1 rounded-md font-bold">Asal: ${kit.asal} • Pendiri: ${kit.pendiri}</span>
                 <h2 class="text-3xl font-heading font-black text-white mt-3 mb-6">${kit.nama_bodykit}</h2>
                 <div class="rounded-2xl overflow-hidden mb-6 border border-brand-border"><img src="${kit.foto_cover}" class="w-full h-80 object-cover"></div>
                 <h3 class="text-lg font-heading font-bold text-white mb-3">Sejarah & Filosofi Desain</h3>
                 <p class="text-sm text-gray-300 leading-relaxed whitespace-pre-line">${kit.sejarah}</p>
+                ${galeriHTML}
             `;
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
