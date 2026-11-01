@@ -437,10 +437,11 @@
             }
         }
 
-        // PEMETAAN FOTO LOKAL (INTEGRA MENGGUNAKAN dc2.jpg)
+        // PEMETAAN FOTO LOKAL (SUPRA A70 MENGGUNAKAN a70.jpg)
         function getFotoMobil(nama) {
             const n = nama.toLowerCase();
 
+            if (n.includes('a70') || (n.includes('supra') && n.includes('70'))) return './a70.jpg';
             if (n.includes('integra') || n.includes('dc2')) return './dc2.jpg';
             if (n.includes('civic') || n.includes('ek9') || n.includes('type r')) return './ek9.jpg';
             if (n.includes('brz') || n.includes('gt86') || n.includes('86')) return './gt86.jpg';
