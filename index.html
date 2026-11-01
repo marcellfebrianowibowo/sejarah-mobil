@@ -103,7 +103,7 @@
 </head>
 <body class="bg-brand-carbon text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brand-red selection:text-white min-h-screen flex flex-col justify-between transition-colors duration-300">
 
-    <!-- PEMUTAR MUSIK LATAR BELAKANG (MENGGUNAKAN ./lagu-jdm.mp3) -->
+    <!-- PEMUTAR MUSIK LATAR BELAKANG -->
     <audio id="bgMusic" loop>
         <source src="./lagu-jdm.mp3" type="audio/mpeg">
         Browser Anda tidak mendukung elemen audio.
@@ -326,10 +326,8 @@
         const musicStatus = document.getElementById('musicStatus');
         const musicPulse = document.getElementById('musicPulse');
 
-        // Atur volume awal
         bgMusic.volume = 0.4;
 
-        // Coba putar otomatis saat web dibuka
         window.addEventListener('load', () => {
             bgMusic.play().then(() => {
                 musicStatus.innerText = "Memutar Musik";
@@ -397,7 +395,7 @@
             }
         }
 
-        // DATA BODYKIT
+        // DATA BODYKIT DENGAN 4 FOTO GALERI LENGKAP
         const dataBodykit = [
             {
                 id: 1,
@@ -406,7 +404,7 @@
                 pendiri: "Wataru Kato",
                 sejarah: "Liberty Walk (LBWK) didirikan pada tahun 1993 oleh seorang visioner bernama Wataru Kato di Nagoya, Jepang. Gaya modifikasinya kental terinspirasi dari kultur balap jalanan klasik Jepang era 70-an dan 80-an, khususnya gaya Kaido Racer dan Bosozoku dengan overfender baut rivet khasnya.",
                 foto_cover: "./bodykit.jpg",
-                galeri: ["./lbwk1.jpg", "./lbwk2.jpg"]
+                galeri: ["./lbwk1.jpg", "./lbwk2.jpg", "./lbwk3.jpg", "./lbwk4.jpg"]
             },
             {
                 id: 2,
@@ -415,7 +413,7 @@
                 pendiri: "Akira Nakai",
                 sejarah: "RAUH-Welt Begriff (RWB) adalah mahakarya tuning khusus Porsche yang didirikan oleh Akira Nakai. Ciri khas absolutnya adalah fender super lebar beraliran ekstrem dan proses perakitan manual langsung oleh sang maestro tanpa alat ukur digital.",
                 foto_cover: "./rwb-logo.jpg",
-                galeri: ["./rwb1.jpg", "./rwb2.jpg"]
+                galeri: ["./rwb1.jpg", "./rwb2.jpg", "./rwb3.jpg", "./rwb4.jpg"]
             }
         ];
 
@@ -439,8 +437,24 @@
             }
         }
 
+        // PEMETAAN FOTO LENGKAP SUPAYA SEMUA MOBIL TERBACA TANPA ERROR
         function getFotoMobil(nama) {
             const n = nama.toLowerCase();
+
+            if (n.includes('brz') || n.includes('gt86') || n.includes('86')) return './brz.jpg';
+            if (n.includes('miata') || n.includes('mx-5') || n.includes('mx5')) return './miata.jpg';
+            if (n.includes('mr2') || n.includes('sw20') || n.includes('mr-2')) return './mr2.jpg';
+            if (n.includes('3000gt') || n.includes('vr-4')) return './3000gt.jpg';
+            if (n.includes('az-1') || n.includes('az1') || n.includes('autozam')) return './az1.jpg';
+            if (n.includes('celica')) return './celica.jpg';
+            if (n.includes('eclipse')) return './eclipse.jpg';
+            if (n.includes('integra') || n.includes('dc2')) return './integra.jpg';
+            if (n.includes('civic') || n.includes('ek9') || n.includes('type r')) return './civic.jpg';
+            if (n.includes('impreza') || n.includes('wrx') || n.includes('22b')) return './impreza.jpg';
+            if (n.includes('crown')) return './crown.jpg';
+            if (n.includes('lfa')) return './lfa.jpg';
+            
+            // Ikonik tambahan
             if (n.includes('r32')) return './r32.jpg';
             if (n.includes('hakosuka') || n.includes('2000gt-r')) return './hakosuka.jpg';
             if (n.includes('r34') || n.includes('skyline') || n.includes('gt-r')) return './gtr.jpg';
@@ -454,6 +468,7 @@
             if (n.includes('ae86') || n.includes('trueno')) return './ae86.jpg';
             if (n.includes('rx-7') || n.includes('rx7')) return './rx7.jpg';
             if (n.includes('porsche') || n.includes('911')) return './porsche.jpg';
+
             return 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
         }
 
