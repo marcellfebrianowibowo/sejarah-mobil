@@ -57,6 +57,22 @@
           background-size: 24px 24px;
           background-position: 0 0, 12px 12px;
         }
+        /* Efek Khusus Wangan Night Mode */
+        body.wangan-night {
+          background-color: #030712 !important;
+          background-image: radial-gradient(rgba(255, 42, 56, 0.15) 1px, transparent 1px), radial-gradient(rgba(56, 189, 248, 0.1) 1px, #030712 1px);
+          background-size: 32px 32px;
+        }
+        body.wangan-night header {
+          background-color: rgba(3, 7, 18, 0.9) !important;
+          border-color: rgba(255, 42, 56, 0.4) !important;
+          box-shadow: 0 0 20px rgba(255, 42, 56, 0.2);
+        }
+        body.wangan-night .bg-brand-slatecard {
+          background-color: #0b0f19 !important;
+          border-color: rgba(56, 189, 248, 0.3) !important;
+          box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+        }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #090B0E; }
         ::-webkit-scrollbar-thumb { background: #1E2530; border-radius: 4px; }
@@ -90,8 +106,17 @@
                 <a onclick="tampilKatalogBodykit()" class="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition cursor-pointer">Sejarah Bodykit</a>
             </nav>
 
-            <div class="flex items-center gap-3">
-                <button onclick="document.documentElement.classList.toggle('dark')" class="p-2 rounded-lg bg-brand-slatecard border border-brand-border text-xs text-gray-400 hover:text-white" title="Ganti Tema">🌓</button>
+            <!-- Tombol Aksi Kanan: Ganti Tema & Wangan Night Mode -->
+            <div class="flex items-center gap-2">
+                <!-- Tombol Wangan Night Mode -->
+                <button onclick="toggleWanganNight()" id="wanganBtn" class="px-3 py-2 rounded-xl bg-brand-slatecard border border-brand-border text-xs font-bold text-sky-400 hover:border-sky-400 transition flex items-center gap-1.5" title="Aktifkan Mode Malam Wangan Tokyo">
+                    <span>🌃</span>
+                    <span class="hidden sm:inline">Wangan Night</span>
+                </button>
+                <!-- Tombol Tema Terang / Gelap (Sudah Diperbaiki) -->
+                <button onclick="toggleTema()" id="themeBtn" class="p-2.5 rounded-xl bg-brand-slatecard border border-brand-border text-xs text-amber-400 hover:border-amber-400 transition" title="Ganti Tema Terang/Gelap">
+                    🌞
+                </button>
             </div>
         </div>
     </header>
@@ -152,7 +177,7 @@
                 <p class="text-base sm:text-lg text-gray-400 mt-4 leading-relaxed">Menelusuri jejak peradaban mesin pembakaran internal, transformasi kultural, dan metamorfosis industri mobil sport dunia dalam lembaran narasi sejarah yang mendalam.</p>
             </div>
 
-            <!-- Cerita Babak 1 (sejarah-1.jpg) -->
+            <!-- Cerita Babak 1 -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-brand-slatecard/60 p-8 md:p-14 rounded-3xl border border-brand-border">
                 <div class="lg:col-span-6 rounded-2xl overflow-hidden border border-brand-border shadow-2xl h-80 md:h-[420px] group">
                     <img src="./sejarah-1.jpg" alt="Era Klasik" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
@@ -169,7 +194,7 @@
                 </div>
             </div>
 
-            <!-- Cerita Babak 2 (sejarah-2.jpg) -->
+            <!-- Cerita Babak 2 -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-brand-slatecard/60 p-8 md:p-14 rounded-3xl border border-brand-border">
                 <div class="lg:col-span-6 space-y-5 lg:order-1 order-2">
                     <span class="text-xs font-mono bg-sky-500/10 text-sky-400 px-3.5 py-1.5 rounded-md font-bold tracking-widest uppercase">BABAK KEDUA • 1900 — 1960an</span>
@@ -186,7 +211,7 @@
                 </div>
             </div>
 
-            <!-- Cerita Babak 3 (sejarah-3.jpg) -->
+            <!-- Cerita Babak 3 -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-brand-slatecard/60 p-8 md:p-14 rounded-3xl border border-brand-border">
                 <div class="lg:col-span-6 rounded-2xl overflow-hidden border border-brand-border shadow-2xl h-80 md:h-[420px] group">
                     <img src="./sejarah-3.jpg" alt="Era JDM 90an" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
@@ -203,7 +228,7 @@
                 </div>
             </div>
 
-            <!-- Cerita Babak 4 (sejarah-4.jpg) -->
+            <!-- Cerita Babak 4 -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-brand-slatecard/60 p-8 md:p-14 rounded-3xl border border-brand-border">
                 <div class="lg:col-span-6 space-y-5 lg:order-1 order-2">
                     <span class="text-xs font-mono bg-emerald-500/10 text-emerald-400 px-3.5 py-1.5 rounded-md font-bold tracking-widest uppercase">BABAK KEEMPAT • 2010an — Sekarang</span>
@@ -277,6 +302,35 @@
         const SUPABASE_KEY = 'sb_publishable_-CWQKbOMRIot2AKjeZp8LA_P9ZsQeAf';
         let semuaDataMobil = [];
         let menuAktif = 'home';
+
+        // Fungsi Tombol Tema Terang / Gelap
+        function toggleTema() {
+            const html = document.documentElement;
+            const themeBtn = document.getElementById('themeBtn');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                themeBtn.innerHTML = '🌙';
+                themeBtn.title = 'Ubah ke Mode Gelap';
+            } else {
+                html.classList.add('dark');
+                themeBtn.innerHTML = '🌞';
+                themeBtn.title = 'Ubah ke Mode Terang';
+            }
+        }
+
+        // Fungsi Tombol Wangan Night Mode (Cyberpunk Neon)
+        function toggleWanganNight() {
+            const body = document.body;
+            body.classList.toggle('wangan-night');
+            const btn = document.getElementById('wanganBtn');
+            if(body.classList.contains('wangan-night')) {
+                btn.style.borderColor = '#FF2A38';
+                btn.style.boxShadow = '0 0 10px rgba(255, 42, 56, 0.5)';
+            } else {
+                btn.style.borderColor = '';
+                btn.style.boxShadow = '';
+            }
+        }
 
         // DATA BODYKIT DENGAN PENJELASAN LENGKAP & PANJANG
         const dataBodykit = [
