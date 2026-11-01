@@ -395,14 +395,14 @@
             }
         }
 
-        // DATA BODYKIT DENGAN 4 FOTO GALERI LENGKAP
+        // DATA BODYKIT DENGAN NARASI PANJANG & MENDALAM + 4 FOTO GALERI
         const dataBodykit = [
             {
                 id: 1,
                 nama_bodykit: "Liberty Walk (LBWK)",
                 asal: "Nagoya, Jepang",
                 pendiri: "Wataru Kato",
-                sejarah: "Liberty Walk (LBWK) didirikan pada tahun 1993 oleh seorang visioner bernama Wataru Kato di Nagoya, Jepang. Gaya modifikasinya kental terinspirasi dari kultur balap jalanan klasik Jepang era 70-an dan 80-an, khususnya gaya Kaido Racer dan Bosozoku dengan overfender baut rivet khasnya.",
+                sejarah: "Liberty Walk (LBWK) didirikan pada tahun 1993 oleh seorang visioner bernama Wataru Kato di Nagoya, Jepang. Pada awalnya, Liberty Walk hanyalah sebuah bengkel kecil yang berfokus pada penjualan mobil bekas dan mengimpor mobil-mobil eksotis dari Amerika Serikat. Namun, Kato-san memiliki hasrat besar untuk mendobrak industri modifikasi yang kaku dan konvensional.\n\nGaya modifikasi LBWK sangat kental terinspirasi dari kultur balap jalanan klasik Jepang era 70-an dan 80-an, khususnya gaya Kaido Racer dan Bosozoku. Ciri khas paling brutal dari Liberty Walk adalah keberanian mereka memotong fender asli pabrikan mobil mewah, lalu memaku overfender super lebar langsung ke bodi menggunakan baut rivet yang diekspos mentah.\n\nGebrakan terbesar mereka adalah ketika Kato-san nekat memotong bodi mulus supercar berharga miliaran rupiah seperti Lamborghini, Ferrari, dan McLaren. Meskipun sempat memicu kemarahan dari para kolektor dan kaum purist, tindakan ekstrem ini justru membuat LBWK dicintai dan dipuja sebagai ikon global custom culture dunia yang mendefinisikan ulang seni modifikasi modern.",
                 foto_cover: "./bodykit.jpg",
                 galeri: ["./lbwk1.jpg", "./lbwk2.jpg", "./lbwk3.jpg", "./lbwk4.jpg"]
             },
@@ -411,7 +411,7 @@
                 nama_bodykit: "RAUH-Welt Begriff (RWB)",
                 asal: "Chiba, Jepang",
                 pendiri: "Akira Nakai",
-                sejarah: "RAUH-Welt Begriff (RWB) adalah mahakarya tuning khusus Porsche yang didirikan oleh Akira Nakai. Ciri khas absolutnya adalah fender super lebar beraliran ekstrem dan proses perakitan manual langsung oleh sang maestro tanpa alat ukur digital.",
+                sejarah: "RAUH-Welt Begriff (RWB) yang berarti 'Konsep Dunia Kasar' dalam bahasa Jerman, adalah mahakarya tuning khusus mobil Porsche yang didirikan oleh seniman otomotif eksentrik asal Jepang, Akira Nakai. Berawal dari kru drift legendaris Rough World di era 90-an, Nakai-san menemukan jalan hidupnya setelah merestorasi sebuah Porsche 930 klasik yang diberi nama 'Stella Artois'.\n\nCiri khas absolut dari RWB adalah bentuk fender super lebar beraliran ekstrem, sayap belakang ducktail atau GT-wing raksasa, velg deep dish ber-offset dalam, serta fitment ceper yang menyentuh aspal. Desain ini memadukan keanggunan sport klasik Eropa dengan kebrutalan balap jalanan malam hari Jepang.\n\nYang membuat RWB berstatus sangat legendaris adalah proses spiritualnya. Nakai-san menolak produksi massal dan terbang sendirian ke seluruh penjuru dunia untuk merakit setiap mobil pesanan pelanggan dengan tangan dan peralatannya sendiri, tanpa alat ukur digital, murni mengandalkan insting tajam dan mata telanjangnya.",
                 foto_cover: "./rwb-logo.jpg",
                 galeri: ["./rwb1.jpg", "./rwb2.jpg", "./rwb3.jpg", "./rwb4.jpg"]
             }
@@ -437,24 +437,25 @@
             }
         }
 
-        // PEMETAAN FOTO LENGKAP SUPAYA SEMUA MOBIL TERBACA TANPA ERROR
+        // PEMETAAN FOTO LOKAL (DISESUAIKAN DENGAN NAMA FILE: ek9.jpg, gt86.jpg, 22b.jpg, dc2.jpg)
         function getFotoMobil(nama) {
             const n = nama.toLowerCase();
 
-            if (n.includes('brz') || n.includes('gt86') || n.includes('86')) return './brz.jpg';
+            if (n.includes('civic') || n.includes('ek9') || n.includes('type r')) return './ek9.jpg';
+            if (n.includes('brz') || n.includes('gt86') || n.includes('86')) return './gt86.jpg';
+            if (n.includes('impreza') || n.includes('wrx') || n.includes('22b')) return './22b.jpg';
+            if (n.includes('integra') || n.includes('dc2')) return './dc2.jpg';
+            
             if (n.includes('miata') || n.includes('mx-5') || n.includes('mx5')) return './miata.jpg';
             if (n.includes('mr2') || n.includes('sw20') || n.includes('mr-2')) return './mr2.jpg';
             if (n.includes('3000gt') || n.includes('vr-4')) return './3000gt.jpg';
             if (n.includes('az-1') || n.includes('az1') || n.includes('autozam')) return './az1.jpg';
             if (n.includes('celica')) return './celica.jpg';
             if (n.includes('eclipse')) return './eclipse.jpg';
-            if (n.includes('integra') || n.includes('dc2')) return './integra.jpg';
-            if (n.includes('civic') || n.includes('ek9') || n.includes('type r')) return './civic.jpg';
-            if (n.includes('impreza') || n.includes('wrx') || n.includes('22b')) return './impreza.jpg';
             if (n.includes('crown')) return './crown.jpg';
             if (n.includes('lfa')) return './lfa.jpg';
             
-            // Ikonik tambahan
+            // Ikonik tambahan lainnya
             if (n.includes('r32')) return './r32.jpg';
             if (n.includes('hakosuka') || n.includes('2000gt-r')) return './hakosuka.jpg';
             if (n.includes('r34') || n.includes('skyline') || n.includes('gt-r')) return './gtr.jpg';
