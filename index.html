@@ -33,10 +33,6 @@
                 heading: ['Syne', 'sans-serif'],
                 sans: ['Plus Jakarta Sans', 'sans-serif'],
                 jp: ['Noto Sans JP', 'sans-serif']
-              },
-              backgroundImage: {
-                'grid-pattern': "radial-gradient(rgba(255, 42, 56, 0.08) 1px, transparent 1px)",
-                'blueprint-grid': "linear-gradient(to right, rgba(56, 189, 248, 0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(56, 189, 248, 0.08) 1px, transparent 1px)"
               }
             }
           }
@@ -51,35 +47,64 @@
           box-shadow: 0 0 25px -4px rgba(56, 189, 248, 0.35);
           border-color: #38BDF8;
         }
-        .carbon-mesh {
-          background-color: #080A0E;
-          background-image: radial-gradient(#1c222c 0.75px, transparent 0.75px), radial-gradient(#1c222c 0.75px, #080A0E 0.75px);
-          background-size: 24px 24px;
-          background-position: 0 0, 12px 12px;
-        }
-        /* Efek Khusus Wangan Night Mode */
+
+        /* --- STYLING WANGAN NIGHT MODE (CYBERPUNK NEON) --- */
         body.wangan-night {
-          background-color: #030712 !important;
-          background-image: radial-gradient(rgba(255, 42, 56, 0.15) 1px, transparent 1px), radial-gradient(rgba(56, 189, 248, 0.1) 1px, #030712 1px);
-          background-size: 32px 32px;
+          background-color: #020408 !important;
+          background-image: 
+            radial-gradient(circle at 50% 20%, rgba(255, 42, 56, 0.25) 0%, transparent 60%),
+            radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.2) 0%, transparent 50%),
+            linear-gradient(to right, rgba(255, 42, 56, 0.05) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+          background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;
         }
         body.wangan-night header {
-          background-color: rgba(3, 7, 18, 0.9) !important;
-          border-color: rgba(255, 42, 56, 0.4) !important;
-          box-shadow: 0 0 20px rgba(255, 42, 56, 0.2);
+          background-color: rgba(2, 4, 8, 0.95) !important;
+          border-color: #FF2A38 !important;
+          box-shadow: 0 0 30px rgba(255, 42, 56, 0.4);
         }
         body.wangan-night .bg-brand-slatecard {
-          background-color: #0b0f19 !important;
-          border-color: rgba(56, 189, 248, 0.3) !important;
-          box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+          background-color: #080D1A !important;
+          border-color: #38BDF8 !important;
+          box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
         }
+        body.wangan-night h1, body.wangan-night h2, body.wangan-night h3 {
+          text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+        }
+
+        /* --- STYLING LIGHT MODE (TERANG) --- */
+        body.light-mode {
+          background-color: #F8FAFC !important;
+          color: #1E293B !important;
+        }
+        body.light-mode header {
+          background-color: rgba(255, 255, 255, 0.9) !important;
+          border-color: #CBD5E1 !important;
+        }
+        body.light-mode span, body.light-mode p, body.light-mode h1, body.light-mode h2, body.light-mode h3, body.light-mode h4 {
+          color: #0F172A !important;
+        }
+        body.light-mode .text-gray-400, body.light-mode .text-gray-300, body.light-mode .text-gray-500 {
+          color: #475569 !important;
+        }
+        body.light-mode .bg-brand-slatecard {
+          background-color: #FFFFFF !important;
+          border-color: #CBD5E1 !important;
+          box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+        body.light-mode input {
+          background-color: #FFFFFF !important;
+          color: #0F172A !important;
+          border-color: #CBD5E1 !important;
+        }
+
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #090B0E; }
         ::-webkit-scrollbar-thumb { background: #1E2530; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #FF2A38; }
     </style>
 </head>
-<body class="bg-brand-carbon text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brand-red selection:text-white min-h-screen flex flex-col justify-between">
+<body class="bg-brand-carbon text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brand-red selection:text-white min-h-screen flex flex-col justify-between transition-colors duration-300">
 
     <!-- Navbar -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl bg-brand-carbon/80 border-b border-brand-border/60">
@@ -93,7 +118,7 @@
                 </div>
                 <div class="flex flex-col">
                     <div class="flex items-baseline gap-2">
-                        <span class="font-heading font-extrabold text-xl tracking-wider text-white">GARASI</span>
+                        <span class="font-heading font-extrabold text-xl tracking-wider text-white" id="brandTitle1">GARASI</span>
                         <span class="font-heading font-extrabold text-xl tracking-wider text-brand-red">LEGENDA</span>
                     </div>
                     <span class="font-jp text-[10px] tracking-widest text-gray-500 uppercase -mt-1 font-semibold">伝説のガレージ • JDM ARCHIVE</span>
@@ -106,16 +131,15 @@
                 <a onclick="tampilKatalogBodykit()" class="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition cursor-pointer">Sejarah Bodykit</a>
             </nav>
 
-            <!-- Tombol Aksi Kanan: Ganti Tema & Wangan Night Mode -->
+            <!-- Tombol Aksi Kanan: Wangan Night & Ganti Tema Terang/Gelap -->
             <div class="flex items-center gap-2">
-                <!-- Tombol Wangan Night Mode -->
-                <button onclick="toggleWanganNight()" id="wanganBtn" class="px-3 py-2 rounded-xl bg-brand-slatecard border border-brand-border text-xs font-bold text-sky-400 hover:border-sky-400 transition flex items-center gap-1.5" title="Aktifkan Mode Malam Wangan Tokyo">
+                <button onclick="toggleWanganNight()" id="wanganBtn" class="px-3 py-2 rounded-xl bg-brand-slatecard border border-brand-border text-xs font-bold text-sky-400 hover:border-sky-400 transition flex items-center gap-1.5 shadow-lg" title="Aktifkan Mode Wangan Night Cyberpunk">
                     <span>🌃</span>
                     <span class="hidden sm:inline">Wangan Night</span>
                 </button>
-                <!-- Tombol Tema Terang / Gelap (Sudah Diperbaiki) -->
-                <button onclick="toggleTema()" id="themeBtn" class="p-2.5 rounded-xl bg-brand-slatecard border border-brand-border text-xs text-amber-400 hover:border-amber-400 transition" title="Ganti Tema Terang/Gelap">
-                    🌞
+                <button onclick="toggleTema()" id="themeBtn" class="px-3 py-2 rounded-xl bg-brand-slatecard border border-brand-border text-xs font-bold text-amber-400 hover:border-amber-400 transition flex items-center gap-1.5" title="Ganti Terang/Gelap">
+                    <span>🌞</span>
+                    <span class="hidden sm:inline" id="themeText">Terang</span>
                 </button>
             </div>
         </div>
@@ -173,7 +197,7 @@
         <section class="py-24 max-w-7xl mx-auto px-6 w-full space-y-24">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-xs uppercase tracking-widest font-bold text-brand-red block mb-2">CHRONOLOGICAL HERITAGE</span>
-                <h2 class="text-3xl sm:text-5xl font-heading font-black text-white uppercase tracking-tight">Evolusi Otomotif: Dari Roda Uap Hingga Era JDM Modern</h2>
+                <h2 class="text-3xl sm:text-5xl font-heading font-black uppercase tracking-tight">Evolusi Otomotif: Dari Roda Uap Hingga Era JDM Modern</h2>
                 <p class="text-base sm:text-lg text-gray-400 mt-4 leading-relaxed">Menelusuri jejak peradaban mesin pembakaran internal, transformasi kultural, dan metamorfosis industri mobil sport dunia dalam lembaran narasi sejarah yang mendalam.</p>
             </div>
 
@@ -184,7 +208,7 @@
                 </div>
                 <div class="lg:col-span-6 space-y-5">
                     <span class="text-xs font-mono bg-brand-red/10 text-brand-red px-3.5 py-1.5 rounded-md font-bold tracking-widest uppercase">BABAK PERTAMA • 1769 — 1900an</span>
-                    <h3 class="text-3xl md:text-4xl font-heading font-extrabold text-white leading-tight">Kelahiran Kendaraan & Era Mesin Uap</h3>
+                    <h3 class="text-3xl md:text-4xl font-heading font-extrabold leading-tight">Kelahiran Kendaraan & Era Mesin Uap</h3>
                     <p class="text-base md:text-lg text-gray-300 leading-relaxed">
                         Peradaban otomotif modern tidak tercipta dalam sekejap mata. Semuanya bermula dari percikan inovasi para visioner awal yang mencoba memanfaatkan tenaga uap untuk menggerakkan kendaraan berat. Kendaraan bermesin uap pertama di dunia diciptakan sebagai cikal bakal alat transportasi darat mandiri tanpa kuda. 
                     </p>
@@ -198,7 +222,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-brand-slatecard/60 p-8 md:p-14 rounded-3xl border border-brand-border">
                 <div class="lg:col-span-6 space-y-5 lg:order-1 order-2">
                     <span class="text-xs font-mono bg-sky-500/10 text-sky-400 px-3.5 py-1.5 rounded-md font-bold tracking-widest uppercase">BABAK KEDUA • 1900 — 1960an</span>
-                    <h3 class="text-3xl md:text-4xl font-heading font-extrabold text-white leading-tight">Revolusi Massal & Kebangkitan Pasca Perang</h3>
+                    <h3 class="text-3xl md:text-4xl font-heading font-extrabold leading-tight">Revolusi Massal & Kebangkitan Pasca Perang</h3>
                     <p class="text-base md:text-lg text-gray-300 leading-relaxed">
                         Memasuki abad ke-20, mobil bukan lagi sekadar mainan mahal para bangsawan atau ilmuwan. Sistem perakitan jalur massal (*assembly line*) yang dipelopori oleh Henry Ford lewat Model T berhasil memangkas biaya produksi secara drastis, menjadikan mobil sebagai kebutuhan nyata bagi masyarakat luas.
                     </p>
@@ -218,7 +242,7 @@
                 </div>
                 <div class="lg:col-span-6 space-y-5">
                     <span class="text-xs font-mono bg-amber-500/10 text-amber-400 px-3.5 py-1.5 rounded-md font-bold tracking-widest uppercase">BABAK KETIGA • 1970 — 2000an</span>
-                    <h3 class="text-3xl md:text-4xl font-heading font-extrabold text-white leading-tight">Zaman Keemasan JDM (Golden Era)</h3>
+                    <h3 class="text-3xl md:text-4xl font-heading font-extrabold leading-tight">Zaman Keemasan JDM (Golden Era)</h3>
                     <p class="text-base md:text-lg text-gray-300 leading-relaxed">
                         Inilah era paling legendaris yang memicu gelombang antusiasme global hingga hari ini. Pabrikan asal Jepang mendefinisikan ulang standar performa tinggi melalui mahakarya mesin legendaris seperti Nissan RB26DETT, Toyota 2JZ-GTE, hingga mesin rotary Mazda 13B-REW yang meraung tinggi di putaran RPM ekstrem.
                     </p>
@@ -232,7 +256,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-brand-slatecard/60 p-8 md:p-14 rounded-3xl border border-brand-border">
                 <div class="lg:col-span-6 space-y-5 lg:order-1 order-2">
                     <span class="text-xs font-mono bg-emerald-500/10 text-emerald-400 px-3.5 py-1.5 rounded-md font-bold tracking-widest uppercase">BABAK KEEMPAT • 2010an — Sekarang</span>
-                    <h3 class="text-3xl md:text-4xl font-heading font-extrabold text-white leading-tight">Era Modern & Ledakan Custom Culture</h3>
+                    <h3 class="text-3xl md:text-4xl font-heading font-extrabold leading-tight">Era Modern & Ledakan Custom Culture</h3>
                     <p class="text-base md:text-lg text-gray-300 leading-relaxed">
                         Di era kontemporer ini, teknologi sasis cerdas, transmisi kopling ganda, dan aerodinamika digital berpadu secara harmonis dengan warisan mekanikal analog masa lalu. Industri otomotif bertransformasi menyongsong era performa tinggi yang lebih ramah lingkungan namun tetap bertenaga buas.
                     </p>
@@ -256,10 +280,10 @@
         </button>
         <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
             <div>
-                <h3 class="text-3xl font-heading font-black text-white">Katalog Mobil Legendaris</h3>
+                <h3 class="text-3xl font-heading font-black">Katalog Mobil Legendaris</h3>
                 <p class="text-sm text-gray-400 mt-1">Data live dari Supabase Database</p>
             </div>
-            <input type="text" id="searchInput" placeholder="Cari mobil atau pabrikan..." class="px-4 py-2.5 rounded-xl border border-brand-border bg-brand-slatecard w-full md:w-80 focus:outline-none focus:border-brand-red text-sm text-white">
+            <input type="text" id="searchInput" placeholder="Cari mobil atau pabrikan..." class="px-4 py-2.5 rounded-xl border border-brand-border bg-brand-slatecard w-full md:w-80 focus:outline-none focus:border-brand-red text-sm">
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="mobilContainer">
             <div class="col-span-3 text-center py-12 text-gray-500 font-mono">Memuat data dari database Supabase...</div>
@@ -271,7 +295,7 @@
         <button onclick="tampilBeranda()" class="mb-6 px-4 py-2 rounded-xl text-xs font-bold bg-brand-slatecard hover:bg-brand-border text-gray-300 border border-brand-border transition flex items-center gap-2 w-max">
             &larr; Kembali ke Beranda
         </button>
-        <h3 class="text-3xl font-heading font-black text-white mb-2">Katalog Bodykit Legend</h3>
+        <h3 class="text-3xl font-heading font-black mb-2">Katalog Bodykit Legend</h3>
         <p class="text-sm text-gray-400 mb-8">Filosofi dan mahakarya master modifikasi dunia dengan narasi lengkap.</p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="katalogBodykitGrid">
             <!-- Render Bodykit lewat JS -->
@@ -289,7 +313,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="border-t border-brand-border bg-brand-carbon pt-12 pb-8 w-full">
+    <footer class="border-t border-brand-border bg-brand-carbon pt-12 pb-8 w-full transition-colors duration-300">
         <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 font-mono gap-4">
             <div>© 2026 Garasi Legenda. Supabase + GitHub Pages.</div>
             <div class="text-brand-red font-semibold">伝説は色褪せない (Legenda Takkan Pernah Pudar)</div>
@@ -303,29 +327,32 @@
         let semuaDataMobil = [];
         let menuAktif = 'home';
 
-        // Fungsi Tombol Tema Terang / Gelap
+        // Fungsi Tombol Tema Terang / Gelap (Diperbaiki Total)
         function toggleTema() {
-            const html = document.documentElement;
+            const body = document.body;
+            const themeText = document.getElementById('themeText');
             const themeBtn = document.getElementById('themeBtn');
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                themeBtn.innerHTML = '🌙';
-                themeBtn.title = 'Ubah ke Mode Gelap';
+
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeText.innerText = 'Gelap';
+                themeBtn.querySelector('span').innerText = '🌙';
             } else {
-                html.classList.add('dark');
-                themeBtn.innerHTML = '🌞';
-                themeBtn.title = 'Ubah ke Mode Terang';
+                themeText.innerText = 'Terang';
+                themeBtn.querySelector('span').innerText = '🌞';
             }
         }
 
-        // Fungsi Tombol Wangan Night Mode (Cyberpunk Neon)
+        // Fungsi Tombol Wangan Night Mode (Cyberpunk Neon Diperkuat)
         function toggleWanganNight() {
             const body = document.body;
             body.classList.toggle('wangan-night');
             const btn = document.getElementById('wanganBtn');
+            
             if(body.classList.contains('wangan-night')) {
                 btn.style.borderColor = '#FF2A38';
-                btn.style.boxShadow = '0 0 10px rgba(255, 42, 56, 0.5)';
+                btn.style.boxShadow = '0 0 15px rgba(255, 42, 56, 0.6)';
             } else {
                 btn.style.borderColor = '';
                 btn.style.boxShadow = '';
@@ -457,7 +484,7 @@
                         <div class="p-6 flex flex-col flex-grow justify-between">
                             <div>
                                 <span class="text-[10px] font-mono bg-brand-red/10 text-brand-red px-2.5 py-1 rounded-md font-bold">${mobil.pabrikan} • ${mobil.tahun}</span>
-                                <h4 class="text-xl font-heading font-extrabold text-white mt-3 mb-2">${mobil.nama_mobil}</h4>
+                                <h4 class="text-xl font-heading font-extrabold mt-3 mb-2">${mobil.nama_mobil}</h4>
                                 <p class="text-xs text-gray-400 line-clamp-3 leading-relaxed">${mobil.sejarah}</p>
                             </div>
                             <button onclick="bukaDetailMobil(${mobil.id})" class="mt-6 w-full py-2.5 rounded-xl bg-brand-carbon hover:bg-brand-red text-white text-xs font-bold transition border border-brand-border hover:border-brand-red">Baca Sejarah &rarr;</button>
@@ -477,7 +504,7 @@
                         <div class="p-6 flex flex-col flex-grow justify-between">
                             <div>
                                 <span class="text-[10px] font-mono bg-sky-500/10 text-sky-400 px-2.5 py-1 rounded-md font-bold">Tuner: ${kit.pendiri}</span>
-                                <h4 class="text-xl font-heading font-extrabold text-white mt-3 mb-2">${kit.nama_bodykit}</h4>
+                                <h4 class="text-xl font-heading font-extrabold mt-3 mb-2">${kit.nama_bodykit}</h4>
                                 <p class="text-xs text-gray-400 line-clamp-3 leading-relaxed">${kit.sejarah}</p>
                             </div>
                             <button onclick="bukaDetailBodykit(${kit.id})" class="mt-6 w-full py-2.5 rounded-xl bg-brand-carbon hover:bg-sky-600 text-white text-xs font-bold transition border border-brand-border hover:border-sky-500">Jelajahi Karya &rarr;</button>
@@ -497,9 +524,9 @@
 
             document.getElementById('detailContent').innerHTML = `
                 <span class="text-xs font-mono bg-brand-red/10 text-brand-red px-3 py-1 rounded-md font-bold">${mobil.pabrikan} • Tahun ${mobil.tahun}</span>
-                <h2 class="text-3xl font-heading font-black text-white mt-3 mb-6">${mobil.nama_mobil}</h2>
+                <h2 class="text-3xl font-heading font-black mt-3 mb-6">${mobil.nama_mobil}</h2>
                 <div class="rounded-2xl overflow-hidden mb-6 border border-brand-border"><img src="${fotoUrl}" class="w-full h-80 object-cover"></div>
-                <h3 class="text-lg font-heading font-bold text-white mb-3">Latar Belakang & Sejarah</h3>
+                <h3 class="text-lg font-heading font-bold mb-3">Latar Belakang & Sejarah</h3>
                 <p class="text-sm text-gray-300 leading-relaxed whitespace-pre-line">${mobil.sejarah}</p>
             `;
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -515,7 +542,7 @@
             let galeriHTML = '';
             if (kit.galeri && kit.galeri.length > 0) {
                 galeriHTML = `
-                    <h3 class="text-lg font-heading font-bold text-white mt-10 mb-4 border-t border-brand-border pt-6">Galeri Karya ${kit.nama_bodykit}</h3>
+                    <h3 class="text-lg font-heading font-bold mt-10 mb-4 border-t border-brand-border pt-6">Galeri Karya ${kit.nama_bodykit}</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         ${kit.galeri.map(foto => `<img src="${foto}" alt="Galeri Bodykit" class="w-full h-56 object-cover rounded-xl border border-brand-border hover:scale-105 transition duration-300">`).join('')}
                     </div>
@@ -524,9 +551,9 @@
 
             document.getElementById('detailContent').innerHTML = `
                 <span class="text-xs font-mono bg-sky-500/10 text-sky-400 px-3 py-1 rounded-md font-bold">Asal: ${kit.asal} • Pendiri: ${kit.pendiri}</span>
-                <h2 class="text-3xl font-heading font-black text-white mt-3 mb-6">${kit.nama_bodykit}</h2>
+                <h2 class="text-3xl font-heading font-black mt-3 mb-6">${kit.nama_bodykit}</h2>
                 <div class="rounded-2xl overflow-hidden mb-6 border border-brand-border"><img src="${kit.foto_cover}" class="w-full h-80 object-cover"></div>
-                <h3 class="text-lg font-heading font-bold text-white mb-3">Sejarah & Filosofi Desain</h3>
+                <h3 class="text-lg font-heading font-bold mb-3">Sejarah & Filosofi Desain</h3>
                 <p class="text-sm text-gray-300 leading-relaxed whitespace-pre-line">${kit.sejarah}</p>
                 ${galeriHTML}
             `;
