@@ -48,7 +48,7 @@
           border-color: #38BDF8;
         }
 
-        /* --- STYLING WANGAN NIGHT MODE (CYBERPUNK NEON) --- */
+        /* --- WANGAN NIGHT MODE --- */
         body.wangan-night {
           background-color: #020408 !important;
           background-image: 
@@ -68,11 +68,8 @@
           border-color: #38BDF8 !important;
           box-shadow: 0 0 20px rgba(56, 189, 248, 0.25);
         }
-        body.wangan-night h1, body.wangan-night h2, body.wangan-night h3 {
-          text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
-        }
 
-        /* --- STYLING LIGHT MODE (TERANG) --- */
+        /* --- LIGHT MODE --- */
         body.light-mode {
           background-color: #F8FAFC !important;
           color: #1E293B !important;
@@ -106,6 +103,31 @@
 </head>
 <body class="bg-brand-carbon text-gray-200 font-sans antialiased overflow-x-hidden selection:bg-brand-red selection:text-white min-h-screen flex flex-col justify-between transition-colors duration-300">
 
+    <!-- PEMUTAR MUSIK LATAR BELAKANG (MENGGUNAKAN ./lagu-jdm.mp3) -->
+    <audio id="bgMusic" loop>
+        <source src="./lagu-jdm.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <!-- WIDGET KONTROL MUSIK DI POJOK KANAN BAWAH -->
+    <div class="fixed bottom-6 right-6 z-50 bg-brand-slatecard border border-brand-border p-3.5 rounded-2xl shadow-2xl backdrop-blur-md flex items-center gap-3">
+        <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-brand-red animate-ping" id="musicPulse"></span>
+            <div class="flex flex-col">
+                <span class="text-[10px] font-mono text-gray-400 uppercase tracking-widest">BGM • JDM Vibes</span>
+                <span class="text-xs font-bold text-white" id="musicStatus">Memutar Musik</span>
+            </div>
+        </div>
+        <div class="h-6 w-[1px] bg-brand-border"></div>
+        <button onclick="toggleMusic()" id="playPauseBtn" class="p-2 rounded-xl bg-brand-red text-white hover:bg-brand-crimson transition text-xs font-bold" title="Play/Pause Musik">
+            ⏸️
+        </button>
+        <div class="flex items-center gap-1.5 pl-1">
+            <span class="text-xs">🔊</span>
+            <input type="range" id="volumeSlider" min="0" max="1" step="0.05" value="0.4" onchange="ubahVolume(this.value)" oninput="ubahVolume(this.value)" class="w-16 accent-brand-red cursor-pointer">
+        </div>
+    </div>
+
     <!-- Navbar -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl bg-brand-carbon/80 border-b border-brand-border/60">
         <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between gap-4">
@@ -118,7 +140,7 @@
                 </div>
                 <div class="flex flex-col">
                     <div class="flex items-baseline gap-2">
-                        <span class="font-heading font-extrabold text-xl tracking-wider text-white" id="brandTitle1">GARASI</span>
+                        <span class="font-heading font-extrabold text-xl tracking-wider text-white">GARASI</span>
                         <span class="font-heading font-extrabold text-xl tracking-wider text-brand-red">LEGENDA</span>
                     </div>
                     <span class="font-jp text-[10px] tracking-widest text-gray-500 uppercase -mt-1 font-semibold">伝説のガレージ • JDM ARCHIVE</span>
@@ -131,13 +153,12 @@
                 <a onclick="tampilKatalogBodykit()" class="px-4 py-2 text-sm font-medium text-gray-400 hover:text-white transition cursor-pointer">Sejarah Bodykit</a>
             </nav>
 
-            <!-- Tombol Aksi Kanan: Wangan Night & Ganti Tema Terang/Gelap -->
             <div class="flex items-center gap-2">
-                <button onclick="toggleWanganNight()" id="wanganBtn" class="px-3 py-2 rounded-xl bg-brand-slatecard border border-brand-border text-xs font-bold text-sky-400 hover:border-sky-400 transition flex items-center gap-1.5 shadow-lg" title="Aktifkan Mode Wangan Night Cyberpunk">
+                <button onclick="toggleWanganNight()" id="wanganBtn" class="px-3 py-2 rounded-xl bg-brand-slatecard border border-brand-border text-xs font-bold text-sky-400 hover:border-sky-400 transition flex items-center gap-1.5 shadow-lg" title="Wangan Night Mode">
                     <span>🌃</span>
                     <span class="hidden sm:inline">Wangan Night</span>
                 </button>
-                <button onclick="toggleTema()" id="themeBtn" class="px-3 py-2 rounded-xl bg-brand-slatecard border border-brand-border text-xs font-bold text-amber-400 hover:border-amber-400 transition flex items-center gap-1.5" title="Ganti Terang/Gelap">
+                <button onclick="toggleTema()" id="themeBtn" class="px-3 py-2 rounded-xl bg-brand-slatecard border border-brand-border text-xs font-bold text-amber-400 hover:border-amber-400 transition flex items-center gap-1.5" title="Ganti Tema">
                     <span>🌞</span>
                     <span class="hidden sm:inline" id="themeText">Terang</span>
                 </button>
@@ -166,7 +187,6 @@
 
                 <!-- 2 Kartu Utama di Tengah -->
                 <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl text-left">
-                    <!-- Kartu Katalog Mobil -->
                     <div onclick="tampilKatalogMobil()" class="group relative rounded-3xl bg-brand-slatecard border border-brand-border/90 overflow-hidden transition-all duration-300 neon-border-hover cursor-pointer flex flex-col justify-between p-8 h-80 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(17,21,28,0.95), rgba(17,21,28,0.6)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80');">
                         <div>
                             <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-brand-red text-white rounded-md">DATABASE CLOUD</span>
@@ -178,7 +198,6 @@
                         </div>
                     </div>
 
-                    <!-- Kartu Sejarah Bodykit -->
                     <div onclick="tampilKatalogBodykit()" class="group relative rounded-3xl bg-brand-blueprint/30 border border-cyan-900/50 overflow-hidden transition-all duration-300 neon-cyan-hover cursor-pointer flex flex-col justify-between p-8 h-80 bg-cover bg-center" style="background-image: linear-gradient(to top, rgba(10,37,64,0.95), rgba(10,37,64,0.6)), url('./bodykit.jpg');">
                         <div>
                             <span class="px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider bg-sky-500/20 text-sky-400 border border-sky-400/30 rounded-md">CUSTOM CULTURE</span>
@@ -193,7 +212,7 @@
             </div>
         </section>
 
-        <!-- BAGIAN NARASI SEJARAH PANJANG DENGAN FOTO EFEK GRAYSCALE -> COLOR HOVER -->
+        <!-- BAGIAN NARASI SEJARAH -->
         <section class="py-24 max-w-7xl mx-auto px-6 w-full space-y-24">
             <div class="text-center max-w-3xl mx-auto mb-16">
                 <span class="text-xs uppercase tracking-widest font-bold text-brand-red block mb-2">CHRONOLOGICAL HERITAGE</span>
@@ -201,7 +220,7 @@
                 <p class="text-base sm:text-lg text-gray-400 mt-4 leading-relaxed">Menelusuri jejak peradaban mesin pembakaran internal, transformasi kultural, dan metamorfosis industri mobil sport dunia dalam lembaran narasi sejarah yang mendalam.</p>
             </div>
 
-            <!-- Cerita Babak 1 -->
+            <!-- Babak 1 -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-brand-slatecard/60 p-8 md:p-14 rounded-3xl border border-brand-border">
                 <div class="lg:col-span-6 rounded-2xl overflow-hidden border border-brand-border shadow-2xl h-80 md:h-[420px] group">
                     <img src="./sejarah-1.jpg" alt="Era Klasik" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
@@ -209,33 +228,25 @@
                 <div class="lg:col-span-6 space-y-5">
                     <span class="text-xs font-mono bg-brand-red/10 text-brand-red px-3.5 py-1.5 rounded-md font-bold tracking-widest uppercase">BABAK PERTAMA • 1769 — 1900an</span>
                     <h3 class="text-3xl md:text-4xl font-heading font-extrabold leading-tight">Kelahiran Kendaraan & Era Mesin Uap</h3>
-                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">
-                        Peradaban otomotif modern tidak tercipta dalam sekejap mata. Semuanya bermula dari percikan inovasi para visioner awal yang mencoba memanfaatkan tenaga uap untuk menggerakkan kendaraan berat. Kendaraan bermesin uap pertama di dunia diciptakan sebagai cikal bakal alat transportasi darat mandiri tanpa kuda. 
-                    </p>
-                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">
-                        Namun, tonggak sejarah sesungguhnya yang mengubah arah peradaban terjadi ketika Karl Benz berhasil mematenkan mobil berbahan bakar bensin beroda tiga di akhir abad ke-19. Penemuan mesin pembakaran internal (*internal combustion engine*) ini memicu revolusi besar-besaran, meletakkan fondasi kokoh bagi industri otomotif global dan mengubah cara manusia menjelajahi dunia selamanya.
-                    </p>
+                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">Peradaban otomotif modern tidak tercipta dalam sekejap mata. Semuanya bermula dari percikan inovasi para visioner awal yang mencoba memanfaatkan tenaga uap untuk menggerakkan kendaraan berat. Kendaraan bermesin uap pertama di dunia diciptakan sebagai cikal bakal alat transportasi darat mandiri tanpa kuda.</p>
+                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">Namun, tonggak sejarah sesungguhnya yang mengubah arah peradaban terjadi ketika Karl Benz berhasil mematenkan mobil berbahan bakar bensin beroda tiga di akhir abad ke-19. Penemuan mesin pembakaran internal ini memicu revolusi besar-besaran bagi industri otomotif global.</p>
                 </div>
             </div>
 
-            <!-- Cerita Babak 2 -->
+            <!-- Babak 2 -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-brand-slatecard/60 p-8 md:p-14 rounded-3xl border border-brand-border">
                 <div class="lg:col-span-6 space-y-5 lg:order-1 order-2">
                     <span class="text-xs font-mono bg-sky-500/10 text-sky-400 px-3.5 py-1.5 rounded-md font-bold tracking-widest uppercase">BABAK KEDUA • 1900 — 1960an</span>
                     <h3 class="text-3xl md:text-4xl font-heading font-extrabold leading-tight">Revolusi Massal & Kebangkitan Pasca Perang</h3>
-                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">
-                        Memasuki abad ke-20, mobil bukan lagi sekadar mainan mahal para bangsawan atau ilmuwan. Sistem perakitan jalur massal (*assembly line*) yang dipelopori oleh Henry Ford lewat Model T berhasil memangkas biaya produksi secara drastis, menjadikan mobil sebagai kebutuhan nyata bagi masyarakat luas.
-                    </p>
-                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">
-                        Di belahan timur, khususnya Jepang, industri otomotif merangkak bangkit dari puing-puing kehancuran Perang Dunia II. Dengan sumber daya yang terbatas, para insinyur Jepang awalnya memfokuskan diri merancang mobil-mobil mungil yang efisien dan tangguh (*Kei-Car*), sebelum akhirnya mengumpulkan keberanian untuk merancang mobil sport pertama mereka yang mengejutkan dunia internasional.
-                    </p>
+                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">Memasuki abad ke-20, mobil bukan lagi sekadar mainan mahal para bangsawan. Sistem perakitan jalur massal yang dipelopori oleh Henry Ford lewat Model T berhasil memangkas biaya produksi secara drastis, menjadikan mobil sebagai kebutuhan nyata bagi masyarakat luas.</p>
+                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">Di belahan timur, khususnya Jepang, industri otomotif merangkak bangkit dari puing-puing kehancuran Perang Dunia II. Para insinyur Jepang memfokuskan diri merancang mobil-mobil efisien sebelum akhirnya merambah kancah global.</p>
                 </div>
                 <div class="lg:col-span-6 rounded-2xl overflow-hidden border border-brand-border shadow-2xl h-80 md:h-[420px] lg:order-2 order-1 group">
                     <img src="./sejarah-2.jpg" alt="Era Produksi Massal" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
                 </div>
             </div>
 
-            <!-- Cerita Babak 3 -->
+            <!-- Babak 3 -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-brand-slatecard/60 p-8 md:p-14 rounded-3xl border border-brand-border">
                 <div class="lg:col-span-6 rounded-2xl overflow-hidden border border-brand-border shadow-2xl h-80 md:h-[420px] group">
                     <img src="./sejarah-3.jpg" alt="Era JDM 90an" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
@@ -243,26 +254,18 @@
                 <div class="lg:col-span-6 space-y-5">
                     <span class="text-xs font-mono bg-amber-500/10 text-amber-400 px-3.5 py-1.5 rounded-md font-bold tracking-widest uppercase">BABAK KETIGA • 1970 — 2000an</span>
                     <h3 class="text-3xl md:text-4xl font-heading font-extrabold leading-tight">Zaman Keemasan JDM (Golden Era)</h3>
-                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">
-                        Inilah era paling legendaris yang memicu gelombang antusiasme global hingga hari ini. Pabrikan asal Jepang mendefinisikan ulang standar performa tinggi melalui mahakarya mesin legendaris seperti Nissan RB26DETT, Toyota 2JZ-GTE, hingga mesin rotary Mazda 13B-REW yang meraung tinggi di putaran RPM ekstrem.
-                    </p>
-                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">
-                        Meskipun terikat oleh aturan pembatasan pabrikan sukarela (*Gentleman's Agreement 280 PS*), potensi mekanikal tersembunyi dari mobil-mobil ini sangat luar biasa. Hal tersebut melahirkan sub-kultur balap malam hari yang ikonik, mempertaruhkan nyali di kelokan tajam pegunungan (*Touge*) dan kecepatan puncak di jalan tol Tokyo (*Wangan*).
-                    </p>
+                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">Inilah era paling legendaris yang memicu gelombang antusiasme global hingga hari ini. Pabrikan asal Jepang mendefinisikan ulang standar performa tinggi melalui mahakarya mesin legendaris seperti Nissan RB26DETT, Toyota 2JZ-GTE, hingga mesin rotary Mazda 13B-REW.</p>
+                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">Hal tersebut melahirkan sub-kultur balap malam hari yang ikonik, mempertaruhkan nyali di kelokan tajam pegunungan dan kecepatan puncak di jalan tol Tokyo.</p>
                 </div>
             </div>
 
-            <!-- Cerita Babak 4 -->
+            <!-- Babak 4 -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center bg-brand-slatecard/60 p-8 md:p-14 rounded-3xl border border-brand-border">
                 <div class="lg:col-span-6 space-y-5 lg:order-1 order-2">
                     <span class="text-xs font-mono bg-emerald-500/10 text-emerald-400 px-3.5 py-1.5 rounded-md font-bold tracking-widest uppercase">BABAK KEEMPAT • 2010an — Sekarang</span>
                     <h3 class="text-3xl md:text-4xl font-heading font-extrabold leading-tight">Era Modern & Ledakan Custom Culture</h3>
-                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">
-                        Di era kontemporer ini, teknologi sasis cerdas, transmisi kopling ganda, dan aerodinamika digital berpadu secara harmonis dengan warisan mekanikal analog masa lalu. Industri otomotif bertransformasi menyongsong era performa tinggi yang lebih ramah lingkungan namun tetap bertenaga buas.
-                    </p>
-                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">
-                        Bersamaan dengan itu, dunia modifikasi independen atau *custom culture* global mengalami masa kejayaannya. Sentuhan seni estetik ekstrem seperti aliran *wide-body* berbalut rivet dari Liberty Walk (LBWK) dan mahakarya spiritual Porsche garapan Akira Nakai (RWB) mengangkat mobil sport klasik menjadi karya seni bernilai tinggi yang dikagumi oleh jutaan penggemar di seluruh penjuru dunia.
-                    </p>
+                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">Di era kontemporer ini, teknologi sasis cerdas dan aerodinamika digital berpadu secara harmonis dengan warisan mekanikal analog masa lalu, menyongsong era performa tinggi yang lebih ramah lingkungan namun tetap bertenaga buas.</p>
+                    <p class="text-base md:text-lg text-gray-300 leading-relaxed">Bersamaan dengan itu, dunia modifikasi independen seperti aliran wide-body dari Liberty Walk (LBWK) dan RWB mengangkat mobil sport klasik menjadi karya seni bernilai tinggi di seluruh penjuru dunia.</p>
                 </div>
                 <div class="lg:col-span-6 rounded-2xl overflow-hidden border border-brand-border shadow-2xl h-80 md:h-[420px] lg:order-2 order-1 group">
                     <img src="./sejarah-4.jpg" alt="Era Modern" class="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700">
@@ -273,11 +276,9 @@
 
     </div>
 
-    <!-- KONTEN KATALOG MOBIL (Awalnya Disembunyikan) -->
+    <!-- KONTEN KATALOG MOBIL -->
     <div id="appContainer" class="hidden flex-grow max-w-7xl mx-auto px-6 py-28 w-full">
-        <button onclick="tampilBeranda()" class="mb-6 px-4 py-2 rounded-xl text-xs font-bold bg-brand-slatecard hover:bg-brand-border text-gray-300 border border-brand-border transition flex items-center gap-2 w-max">
-            &larr; Kembali ke Beranda
-        </button>
+        <button onclick="tampilBeranda()" class="mb-6 px-4 py-2 rounded-xl text-xs font-bold bg-brand-slatecard hover:bg-brand-border text-gray-300 border border-brand-border transition flex items-center gap-2 w-max">&larr; Kembali ke Beranda</button>
         <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
             <div>
                 <h3 class="text-3xl font-heading font-black">Katalog Mobil Legendaris</h3>
@@ -290,26 +291,18 @@
         </div>
     </div>
 
-    <!-- KONTEN SEJARAH BODYKIT (Awalnya Disembunyikan) -->
+    <!-- KONTEN SEJARAH BODYKIT -->
     <div id="bodykitContainer" class="hidden flex-grow max-w-7xl mx-auto px-6 py-28 w-full">
-        <button onclick="tampilBeranda()" class="mb-6 px-4 py-2 rounded-xl text-xs font-bold bg-brand-slatecard hover:bg-brand-border text-gray-300 border border-brand-border transition flex items-center gap-2 w-max">
-            &larr; Kembali ke Beranda
-        </button>
+        <button onclick="tampilBeranda()" class="mb-6 px-4 py-2 rounded-xl text-xs font-bold bg-brand-slatecard hover:bg-brand-border text-gray-300 border border-brand-border transition flex items-center gap-2 w-max">&larr; Kembali ke Beranda</button>
         <h3 class="text-3xl font-heading font-black mb-2">Katalog Bodykit Legend</h3>
         <p class="text-sm text-gray-400 mb-8">Filosofi dan mahakarya master modifikasi dunia dengan narasi lengkap.</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="katalogBodykitGrid">
-            <!-- Render Bodykit lewat JS -->
-        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="katalogBodykitGrid"></div>
     </div>
 
-    <!-- HALAMAN DETAIL (Awalnya Disembunyikan) -->
+    <!-- HALAMAN DETAIL -->
     <div id="detailContainer" class="hidden max-w-4xl mx-auto px-6 py-28 w-full flex-grow">
-        <button onclick="kembaliKeKatalog()" class="mb-6 px-4 py-2 rounded-xl text-xs font-bold bg-brand-slatecard hover:bg-brand-border text-gray-300 border border-brand-border transition flex items-center gap-2 w-max">
-            &larr; Kembali
-        </button>
-        <div id="detailContent" class="bg-brand-slatecard rounded-3xl border border-brand-border p-8 md:p-10 shadow-2xl">
-            <!-- Detail Konten -->
-        </div>
+        <button onclick="kembaliKeKatalog()" class="mb-6 px-4 py-2 rounded-xl text-xs font-bold bg-brand-slatecard hover:bg-brand-border text-gray-300 border border-brand-border transition flex items-center gap-2 w-max">&larr; Kembali</button>
+        <div id="detailContent" class="bg-brand-slatecard rounded-3xl border border-brand-border p-8 md:p-10 shadow-2xl"></div>
     </div>
 
     <!-- Footer -->
@@ -320,14 +313,59 @@
         </div>
     </footer>
 
-    <!-- SKRIP APLIKASI & DATABASE SUPABASE -->
+    <!-- SKRIP APLIKASI & MUSIK -->
     <script>
         const SUPABASE_URL = 'https://ligbjputqpzubhbxmdia.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_-CWQKbOMRIot2AKjeZp8LA_P9ZsQeAf';
         let semuaDataMobil = [];
         let menuAktif = 'home';
 
-        // Fungsi Tombol Tema Terang / Gelap (Diperbaiki Total)
+        // --- PENGATUR AUDIO / MUSIK LATAR BELAKANG ---
+        const bgMusic = document.getElementById('bgMusic');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const musicStatus = document.getElementById('musicStatus');
+        const musicPulse = document.getElementById('musicPulse');
+
+        // Atur volume awal
+        bgMusic.volume = 0.4;
+
+        // Coba putar otomatis saat web dibuka
+        window.addEventListener('load', () => {
+            bgMusic.play().then(() => {
+                musicStatus.innerText = "Memutar Musik";
+                musicPulse.style.display = "block";
+                playPauseBtn.innerText = "⏸️";
+            }).catch(error => {
+                musicStatus.innerText = "Musik Dijeda (Klik Play)";
+                musicPulse.style.display = "none";
+                playPauseBtn.innerText = "▶️";
+            });
+        });
+
+        function toggleMusic() {
+            if (bgMusic.paused) {
+                bgMusic.play();
+                musicStatus.innerText = "Memutar Musik";
+                musicPulse.style.display = "block";
+                playPauseBtn.innerText = "⏸️";
+            } else {
+                bgMusic.pause();
+                musicStatus.innerText = "Musik Dimatikan";
+                musicPulse.style.display = "none";
+                playPauseBtn.innerText = "▶️";
+            }
+        }
+
+        function ubahVolume(val) {
+            bgMusic.volume = val;
+            if (val == 0) {
+                musicStatus.innerText = "Mute (Volume 0)";
+            } else {
+                musicStatus.innerText = "Volume: " + Math.round(val * 100) + "%";
+            }
+        }
+
+        // --- TEMA TERANG / GELAP ---
         function toggleTema() {
             const body = document.body;
             const themeText = document.getElementById('themeText');
@@ -344,7 +382,7 @@
             }
         }
 
-        // Fungsi Tombol Wangan Night Mode (Cyberpunk Neon Diperkuat)
+        // --- WANGAN NIGHT MODE ---
         function toggleWanganNight() {
             const body = document.body;
             body.classList.toggle('wangan-night');
@@ -359,25 +397,25 @@
             }
         }
 
-        // DATA BODYKIT DENGAN PENJELASAN LENGKAP & PANJANG
+        // DATA BODYKIT
         const dataBodykit = [
             {
                 id: 1,
                 nama_bodykit: "Liberty Walk (LBWK)",
                 asal: "Nagoya, Jepang",
                 pendiri: "Wataru Kato",
-                sejarah: "Liberty Walk (LBWK) didirikan pada tahun 1993 oleh seorang visioner bernama Wataru Kato di Nagoya, Jepang. Pada awalnya, Liberty Walk hanyalah sebuah bengkel kecil yang berfokus pada penjualan mobil bekas dan mengimpor mobil-mobil eksotis dari Amerika Serikat. Namun, Kato-san memiliki hasrat untuk mendobrak industri modifikasi yang kaku.\n\nGaya modifikasi LBWK sangat kental terinspirasi dari kultur balap jalanan klasik Jepang era 70-an dan 80-an, khususnya gaya Kaido Racer dan Bosozoku. Ciri khas paling brutal dari Liberty Walk adalah keberanian mereka memotong fender asli pabrikan, lalu memaku overfender super lebar langsung ke bodi menggunakan baut rivet yang diekspos mentah.\n\nGebrakan terbesar mereka adalah ketika Kato-san nekat memotong bodi mulus supercar berharga miliaran rupiah seperti Lamborghini dan Ferrari. Meskipun sempat memicu kemarahan kaum purist, tindakan ekstrem ini justru membuat LBWK dicintai dan dipuja sebagai ikon global custom culture dunia.",
+                sejarah: "Liberty Walk (LBWK) didirikan pada tahun 1993 oleh seorang visioner bernama Wataru Kato di Nagoya, Jepang. Gaya modifikasinya kental terinspirasi dari kultur balap jalanan klasik Jepang era 70-an dan 80-an, khususnya gaya Kaido Racer dan Bosozoku dengan overfender baut rivet khasnya.",
                 foto_cover: "./bodykit.jpg",
-                galeri: ["./lbwk1.jpg", "./lbwk2.jpg", "./lbwk3.jpg", "./lbwk4.jpg"]
+                galeri: ["./lbwk1.jpg", "./lbwk2.jpg"]
             },
             {
                 id: 2,
                 nama_bodykit: "RAUH-Welt Begriff (RWB)",
                 asal: "Chiba, Jepang",
                 pendiri: "Akira Nakai",
-                sejarah: "RAUH-Welt Begriff (RWB) yang berarti 'Konsep Dunia Kasar' dalam bahasa Jerman, adalah mahakarya tuning khusus Porsche yang didirikan oleh seniman otomotif eksentrik asal Jepang, Akira Nakai. Berawal dari kru drift legendaris Rough World di era 90-an, Nakai-san menemukan jalan hidupnya setelah merestorasi sebuah Porsche 930 klasik yang diberi nama 'Stella Artois'.\n\nCiri khas absolut dari RWB adalah fender super lebar beraliran ekstrem, sayap belakang ducktail atau GT-wing raksasa, velg deep dish ber-offset dalam, serta fitment ceper yang menyentuh aspal. Desain ini memadukan keanggunan sport klasik Eropa dengan kebrutalan balap jalanan Jepang.\n\nYang membuat RWB berstatus legendaris adalah proses spiritualnya. Nakai-san menolak produksi massal dan terbang sendirian ke seluruh dunia untuk merakit setiap mobil dengan tangannya sendiri, tanpa alat ukur digital, hanya mengandalkan insting tajam dan mata telanjangnya.",
+                sejarah: "RAUH-Welt Begriff (RWB) adalah mahakarya tuning khusus Porsche yang didirikan oleh Akira Nakai. Ciri khas absolutnya adalah fender super lebar beraliran ekstrem dan proses perakitan manual langsung oleh sang maestro tanpa alat ukur digital.",
                 foto_cover: "./rwb-logo.jpg",
-                galeri: ["./rwb1.jpg", "./rwb2.jpg", "./rwb3.jpg", "./rwb4.jpg"]
+                galeri: ["./rwb1.jpg", "./rwb2.jpg"]
             }
         ];
 
@@ -401,10 +439,8 @@
             }
         }
 
-        // PEMETAAN FOTO LOKAL LENGKAP UNTUK SEMUA MOBIL
         function getFotoMobil(nama) {
             const n = nama.toLowerCase();
-
             if (n.includes('r32')) return './r32.jpg';
             if (n.includes('hakosuka') || n.includes('2000gt-r')) return './hakosuka.jpg';
             if (n.includes('r34') || n.includes('skyline') || n.includes('gt-r')) return './gtr.jpg';
@@ -413,29 +449,11 @@
             if (n.includes('180sx') || n.includes('rps13')) return './180sx.jpg';
             if (n.includes('s14')) return './s14.jpg';
             if (n.includes('silvia') || n.includes('s15')) return './silvia.jpg';
-            if (n.includes('a70')) return './a70.jpg';
             if (n.includes('supra') || n.includes('a80')) return './supra.jpg';
             if (n.includes('chaser') || n.includes('jzx100')) return './chaser.jpg';
-            if (n.includes('mr2') || n.includes('sw20')) return './mr2.jpg';
-            if (n.includes('celica') || n.includes('st205')) return './celica.jpg';
             if (n.includes('ae86') || n.includes('trueno')) return './ae86.jpg';
-            if (n.includes('86') || n.includes('brz')) return './gt86.jpg';
-            if (n.includes('crown')) return './crown.jpg';
-            if (n.includes('ek9') || n.includes('civic')) return './ek9.jpg';
-            if (n.includes('dc2') || n.includes('integra')) return './dc2.jpg';
-            if (n.includes('nsx')) return './nsx.jpg';
-            if (n.includes('s2000')) return './s2000.jpg';
-            if (n.includes('miata') || n.includes('mx-5') || n.includes('mx5')) return './miata.jpg';
-            if (n.includes('az-1') || n.includes('az1') || n.includes('autozam')) return './az1.jpg';
-            if (n.includes('rx-7') || n.includes('rx7') || n.includes('mazda')) return './rx7.jpg';
-            if (n.includes('3000gt') || n.includes('vr-4')) return './3000gt.jpg';
-            if (n.includes('eclipse')) return './eclipse.jpg';
-            if (n.includes('evo') || n.includes('lancer')) return './evo.jpg';
-            if (n.includes('22b')) return './22b.jpg';
-            if (n.includes('impreza') || n.includes('wrx')) return './impreza.jpg';
-            if (n.includes('lfa') || n.includes('lexus')) return './lfa.jpg';
+            if (n.includes('rx-7') || n.includes('rx7')) return './rx7.jpg';
             if (n.includes('porsche') || n.includes('911')) return './porsche.jpg';
-
             return 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
         }
 
