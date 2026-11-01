@@ -437,14 +437,14 @@
             }
         }
 
-        // PEMETAAN FOTO LOKAL (DISESUAIKAN DENGAN NAMA FILE: ek9.jpg, gt86.jpg, 22b.jpg, dc2.jpg)
+        // PEMETAAN FOTO LOKAL (INTEGRA MENGGUNAKAN dc2.jpg)
         function getFotoMobil(nama) {
             const n = nama.toLowerCase();
 
+            if (n.includes('integra') || n.includes('dc2')) return './dc2.jpg';
             if (n.includes('civic') || n.includes('ek9') || n.includes('type r')) return './ek9.jpg';
             if (n.includes('brz') || n.includes('gt86') || n.includes('86')) return './gt86.jpg';
             if (n.includes('impreza') || n.includes('wrx') || n.includes('22b')) return './22b.jpg';
-            if (n.includes('integra') || n.includes('dc2')) return './dc2.jpg';
             
             if (n.includes('miata') || n.includes('mx-5') || n.includes('mx5')) return './miata.jpg';
             if (n.includes('mr2') || n.includes('sw20') || n.includes('mr-2')) return './mr2.jpg';
