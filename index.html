@@ -300,11 +300,35 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="katalogBodykitGrid"></div>
     </div>
 
+    <!-- KONTEN LOGIN ADMIN -->
+    <div id="loginContainer" class="hidden flex-grow max-w-md mx-auto px-6 py-36 w-full flex items-center justify-center">
+        <div class="bg-brand-slatecard border border-brand-border rounded-3xl p-8 w-full shadow-2xl">
+            <div class="text-center mb-6">
+                <span class="text-3xl">🔐</span>
+                <h3 class="text-2xl font-heading font-black text-white mt-2">Login Admin</h3>
+                <p class="text-xs text-gray-400 mt-1">Masukkan kredensial khusus administrator</p>
+            </div>
+            <form onsubmit="prosesLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono uppercase text-gray-400 mb-1">Username</label>
+                    <input type="text" id="loginUser" required class="w-full px-4 py-2.5 rounded-xl border border-brand-border bg-brand-carbon text-white text-sm focus:outline-none focus:border-brand-red" placeholder="admin">
+                </div>
+                <div>
+                    <label class="block text-xs font-mono uppercase text-gray-400 mb-1">Password</label>
+                    <input type="password" id="loginPass" required class="w-full px-4 py-2.5 rounded-xl border border-brand-border bg-brand-carbon text-white text-sm focus:outline-none focus:border-brand-red" placeholder="••••••••">
+                </div>
+                <div id="loginError" class="text-xs text-brand-red font-mono hidden">Username atau password salah!</div>
+                <button type="submit" class="w-full py-3 rounded-xl bg-brand-red hover:bg-brand-crimson text-white text-xs font-bold transition shadow-lg">Masuk Panel Admin</button>
+            </form>
+            <button onclick="tampilBeranda()" class="w-full mt-3 py-2.5 rounded-xl bg-brand-carbon hover:bg-brand-border text-gray-400 text-xs font-bold transition border border-brand-border">Kembali ke Beranda</button>
+        </div>
+    </div>
+
     <!-- KONTEN ADMIN PANEL (CRUD SUPABASE) -->
     <div id="adminContainer" class="hidden flex-grow max-w-7xl mx-auto px-6 py-28 w-full">
         <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
             <div>
-                <button onclick="tampilBeranda()" class="mb-4 px-4 py-2 rounded-xl text-xs font-bold bg-brand-slatecard hover:bg-brand-border text-gray-300 border border-brand-border transition flex items-center gap-2 w-max">&larr; Kembali ke Beranda</button>
+                <button onclick="logoutAdmin()" class="mb-4 px-4 py-2 rounded-xl text-xs font-bold bg-brand-red/10 hover:bg-brand-red/20 text-brand-red border border-brand-red/30 transition flex items-center gap-2 w-max">🔒 Keluar (Logout Admin)</button>
                 <h3 class="text-3xl font-heading font-black text-white">⚙️ Admin Panel — Manajemen Mobil</h3>
                 <p class="text-sm text-gray-400 mt-1">Tambah, Edit, dan Hapus data mobil langsung tersinkronisasi ke Supabase</p>
             </div>
@@ -385,12 +409,16 @@
         </div>
     </footer>
 
-    <!-- SKRIP APLIKASI, MUSIK & ADMIN PANEL CRUD -->
+    <!-- SKRIP APLIKASI, MUSIK & AUTENTIKASI ADMIN -->
     <script>
         const SUPABASE_URL = 'https://ligbjputqpzubhbxmdia.supabase.co';
         const SUPABASE_KEY = 'sb_publishable_-CWQKbOMRIot2AKjeZp8LA_P9ZsQeAf';
         let semuaDataMobil = [];
         let menuAktif = 'home';
+
+        // KREDENSIAL ADMIN (Bisa kamu ubah sesuai keinginan)
+        const ADMIN_USER = "admin";
+        const ADMIN_PASS = "admin123";
 
         // --- PENGATUR AUDIO / MUSIK LATAR BELAKANG ---
         const bgMusic = document.getElementById('bgMusic');
@@ -467,7 +495,7 @@
             }
         }
 
-        // DATA BODYKIT DENGAN NARASI PANJANG & MENDALAM + 4 FOTO GALERI
+        // DATA BODYKIT
         const dataBodykit = [
             {
                 id: 1,
@@ -499,7 +527,9 @@
                 if (!response.ok) throw new Error('Gagal mengambil data dari Supabase');
                 semuaDataMobil = await response.json();
                 renderKatalogMobil(semuaDataMobil);
-                renderAdminTable(semuaDataMobil);
+                if(sessionStorage.getItem('isLoggedIn') === 'true') {
+                    renderAdminTable(semuaDataMobil);
+                }
 
                 document.getElementById('searchInput').addEventListener('input', (e) => {
                     const term = e.target.value.toLowerCase();
@@ -547,12 +577,13 @@
             return 'https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1000&q=80';
         }
 
-        // NAVIGASI ANTAR HALAMAN
+        // NAVIGASI & OTENTIKASI ADMIN
         function tampilBeranda() {
             menuAktif = 'home';
             document.getElementById('homeContainer').classList.remove('hidden');
             document.getElementById('appContainer').classList.add('hidden');
             document.getElementById('bodykitContainer').classList.add('hidden');
+            document.getElementById('loginContainer').classList.add('hidden');
             document.getElementById('adminContainer').classList.add('hidden');
             document.getElementById('detailContainer').classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -563,6 +594,7 @@
             document.getElementById('homeContainer').classList.add('hidden');
             document.getElementById('appContainer').classList.remove('hidden');
             document.getElementById('bodykitContainer').classList.add('hidden');
+            document.getElementById('loginContainer').classList.add('hidden');
             document.getElementById('adminContainer').classList.add('hidden');
             document.getElementById('detailContainer').classList.add('hidden');
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -572,6 +604,7 @@
             menuAktif = 'bodykit';
             document.getElementById('homeContainer').classList.add('hidden');
             document.getElementById('appContainer').classList.add('hidden');
+            document.getElementById('loginContainer').classList.add('hidden');
             document.getElementById('adminContainer').classList.add('hidden');
             document.getElementById('detailContainer').classList.add('hidden');
             document.getElementById('bodykitContainer').classList.remove('hidden');
@@ -585,9 +618,39 @@
             document.getElementById('appContainer').classList.add('hidden');
             document.getElementById('bodykitContainer').classList.add('hidden');
             document.getElementById('detailContainer').classList.add('hidden');
-            document.getElementById('adminContainer').classList.remove('hidden');
-            renderAdminTable(semuaDataMobil);
+
+            // Cek apakah sudah login
+            if (sessionStorage.getItem('isLoggedIn') === 'true') {
+                document.getElementById('loginContainer').classList.add('hidden');
+                document.getElementById('adminContainer').classList.remove('hidden');
+                renderAdminTable(semuaDataMobil);
+            } else {
+                document.getElementById('adminContainer').classList.add('hidden');
+                document.getElementById('loginContainer').classList.remove('hidden');
+            }
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function prosesLogin(event) {
+            event.preventDefault();
+            const user = document.getElementById('loginUser').value;
+            const pass = document.getElementById('loginPass').value;
+            const errorBox = document.getElementById('loginError');
+
+            if (user === ADMIN_USER && pass === ADMIN_PASS) {
+                sessionStorage.setItem('isLoggedIn', 'true');
+                errorBox.classList.add('hidden');
+                document.getElementById('loginUser').value = '';
+                document.getElementById('loginPass').value = '';
+                tampilAdminPanel();
+            } else {
+                errorBox.classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('isLoggedIn');
+            tampilBeranda();
         }
 
         function kembaliKeKatalog() {
@@ -704,7 +767,6 @@
             try {
                 let response;
                 if (id) {
-                    // UPDATE (PATCH)
                     response = await fetch(`${SUPABASE_URL}/rest/v1/mobil?id=eq.${id}`, {
                         method: 'PATCH',
                         headers: {
@@ -716,7 +778,6 @@
                         body: JSON.stringify(payload)
                     });
                 } else {
-                    // CREATE (POST)
                     response = await fetch(`${SUPABASE_URL}/rest/v1/mobil`, {
                         method: 'POST',
                         headers: {
